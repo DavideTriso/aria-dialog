@@ -1,0 +1,50 @@
+//BLOCK
+.dialog {
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+//ELEMENTS
+.dialog__wrapper {
+  background-color: #ededed;
+  border-radius: 0.5rem;
+  margin: auto;
+  padding: 0.75rem;
+  position: relative;
+  width: 15rem;
+}
+
+.dialog__header {
+  margin: 0.5rem 0
+}
+
+.dialog__heading {
+  margin: 0;
+}
+.dialog__dismiss-btn {
+  
+  position: absolute;
+  right: 0.2rem;
+  top: 0.2rem;
+}
+
+.dialog__body {
+  
+}
+
+.dialog__options {
+  
+}
+
+.dialog__option-btn {
+  
+}
+
+//MODIFIERS
+.dialog_alert {
+  
+}
