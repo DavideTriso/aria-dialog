@@ -26,11 +26,12 @@
   function getDialogIndex(dialog) {
     var i = 0,
       l = dialogsArray.length,
-      index = 0;
+      index = 0,
+      dialogId = dialog.attr('id');
 
     //find out index of dialog settings and elements in array
     for (i; i < l; i = i + 1) {
-      if (dialogsArray[i][0] === dialog.attr('id')) {
+      if (dialogsArray[i][0] === dialogId) {
         index = i;
       }
     }
@@ -198,8 +199,8 @@
     dialogsArray[index][1].wrapper.attr(a.aHi, a.t);
   };
 
-
-
+  
+  
   //REMOVE DIALOG
   //-----------------------------------------------
   methods.remove = function (dialog) {
