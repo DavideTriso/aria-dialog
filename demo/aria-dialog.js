@@ -1,6 +1,6 @@
 (function ($) {
   'use strict';
-  var dialogsArray = (typeof dialogsArray === 'undefined') ? [] : dialogsArray, //check if dialogArray exists or not
+  var dialogsArray = [],
     methods = {},
     count = 0,
     focusEl = '',
@@ -47,6 +47,15 @@
       '-moz-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
       '-ms-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
       'transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
+    });
+  }
+  
+  
+    //position tooltip relative to mouse pointer position
+  function followMousePointer(dialogWrapper, event) {
+    dialogWrapper.css({
+      'margin-left': event.pageX,
+      'margin-top': event.pageY,
     });
   }
   //PLUGIN METHODS
@@ -118,7 +127,8 @@
     //set tabindex to -1 to permit to set focus to the wrapper with JS when dialog is open
     //set aria-hidden to true
     elements.wrapper.attr(a.tbI, '0').attr(a.aHi, a.t);
-
+    
+    
     //increment count after every initalisation
     count = count + 1;
   };
@@ -199,8 +209,8 @@
     dialogsArray[index][1].wrapper.attr(a.aHi, a.t);
   };
 
-  
-  
+
+
   //REMOVE DIALOG
   //-----------------------------------------------
   methods.remove = function (dialog) {
@@ -262,7 +272,8 @@ $(document).ready(function () {
 
 
   $('#dialog-2').ariaDialog({
-    fadeSpeed: 600
+    fadeSpeed: 600,
+    draggable: true
   });
 
   $('#open-1').click(function () {

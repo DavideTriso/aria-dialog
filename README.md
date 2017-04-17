@@ -52,7 +52,7 @@ Use following HTML markup in your HTML file to insert a dialog:
 
 **IMPORTANT**: if no ID is set on the _.dialog_ element, the plugin automatically generates and sets an ID when a dialog is initialised. Nevertheless, setting an ID to each dialog in HTML is recommended in order to simplify jQuery selectors when calling methods on a dialog.
 
-## Initialisation
+## Initialise
 
 Initialise the plugin as follows:
 

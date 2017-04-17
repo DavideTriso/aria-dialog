@@ -1,6 +1,6 @@
 (function ($) {
   'use strict';
-  var dialogsArray = (typeof dialogsArray === 'undefined') ? [] : dialogsArray, //check if dialogArray exists or not
+  var dialogsArray = [],
     methods = {},
     count = 0,
     focusEl = '',
@@ -225,7 +225,6 @@
     //remove all attributes from dialog wrapper
     dialogsArray[index][1].wrapper.removeAttr(a.r).removeAttr(a.aLi).removeAttr(a.tbI).removeAttr(a.aHi);
   };
-
 
 
   //PLUGIN
