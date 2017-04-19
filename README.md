@@ -28,7 +28,7 @@ Name | Default | Type | Description
 dialogClass | dialog | string | Class of a dialog element.
 dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper.
 dialogHeadingClass | dialog__heading | string | Class of a dialog heading .
-dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for futire verions of the plugin).
+dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin).
 closeWithEsc | false | bool | Close dialog when esc key is pressed.
 left | false | false or int | Override default dialog horizontal positioning by setting the css property 'left' for the dialog's wrapper
 top | false | false or int |Override default dialog vertical positioning by setting the css property 'top' for the dialog's wrapper
@@ -38,7 +38,7 @@ fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
 ## Usage
 
 1. Include the JS script **aria-dialog.js** - or the minified production script **aria-dialog.min.js**-  in the head or the body of your HTML file.
-2. Include the CSS file  **aria-dialog.cs** in the head of your HTML file or use the SCSS files. Adapt the CSS rules to match your website's design. 
+2. Include the CSS file  **aria-dialog.css** in the head of your HTML file or use the SCSS files. Adapt the CSS rules to match your website's design. 
 3. Initialise the widget within an inline script tag, or in an external JS file.
 
 ### HTML
