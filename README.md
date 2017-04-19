@@ -28,7 +28,7 @@ Name | Default | Type | Description
 dialogClass | dialog | string | Class of a dialog element.
 dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper.
 dialogHeadingClass | dialog__heading | string | Class of a dialog heading .
-dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see (https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog)[https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog] and (https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal)[https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal]. (Support for non-modal dialog is planned for futire verions of the plugin).
+dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for futire verions of the plugin).
 closeWithEsc | false | bool | Close dialog when esc key is pressed.
 left | false | false or int | Override default dialog horizontal positioning by setting the css property 'left' for the dialog's wrapper
 top | false | false or int |Override default dialog vertical positioning by setting the css property 'top' for the dialog's wrapper
