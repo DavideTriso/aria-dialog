@@ -158,8 +158,7 @@
       positionDialog(wrapper, dialogsArray[index][2]);
     });
     //show wrapper
-    dialogsArray[index][1].wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1);
-    dialogsArray[index][1].wrapper.attr(a.aHi, a.f);
+    wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1).attr(a.aHi, a.f);
 
     //if(dialogsArray[index][2].dialogType !== 'non-modal') {
     //focus dialog if it is a modal or alert dialog
