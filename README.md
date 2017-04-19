@@ -16,8 +16,10 @@ Developed and tested with jQuery 3.2.1
 
 ## Cross-browser tests
 
-* 19. April 2017: Tested on **Google Chrome 57** / macOS Sierra 10.12.4. No issues found.
-* 19. April 2017: Tested on **Mozilla Firefox 50** / macOS Sierra 10.12.4. No issues found.
+* 19. April 2017: Tested on **Google Chrome 57** / macOS Sierra 10 No issues found.
+* 19. April 2017: Tested on **Mozilla Firefox 50** / macOS Sierra 10 No issues found.
+* 19. April 2017: Tested on **Safari 10** / macOS Sierra 10 No issues found.
+
 
 ## Settings / Options
 
