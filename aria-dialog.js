@@ -134,6 +134,8 @@
   //-----------------------------------------------
   methods.open = function (dialog) {
     var index = getDialogIndex(dialog),
+      dialog = dialogsArray[index][1].dialog,
+      wrapper = dialogsArray[index][1].wrapper,
       focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled'),
       dragNow = false,
       dragInitialOffset = {},
@@ -149,11 +151,11 @@
 
 
     //show dialog    
-    dialogsArray[index][1].dialog.show();
+    dialog.show();
     //vertically align dialog
-    positionDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
+    positionDialog(wrapper, dialogsArray[index][2]);
     $(window).on('resize', function () {
-      positionDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
+      positionDialog(wrapper, dialogsArray[index][2]);
     });
     //show wrapper
     dialogsArray[index][1].wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1);
@@ -161,7 +163,7 @@
 
     //if(dialogsArray[index][2].dialogType !== 'non-modal') {
     //focus dialog if it is a modal or alert dialog
-    dialogsArray[index][1].wrapper.focus();
+    wrapper.focus();
 
     //manage focus inside dialog
     //trap focus inside modal 
@@ -195,17 +197,18 @@
   //CLOSE DIALOG
   //-----------------------------------------------
   methods.close = function (dialog) {
-    var index = getDialogIndex(dialog);
+    var index = getDialogIndex(dialog),
+        dialog = dialogsArray[index][1].dialog,
+        wrapper = dialogsArray[index][1].wrapper;
 
     //fade out dialog    
-    dialogsArray[index][1].wrapper.fadeOut(dialogsArray[index][2].fadeSpeed, function () {
-      dialogsArray[index][1].dialog.hide();
+    wrapper.attr(a.aHi, a.t).fadeOut(dialogsArray[index][2].fadeSpeed, function () {
+      dialog.hide();
       //move focus back to element that had focus before dialog was opened
       if (focusEl !== '') {
         focusEl.focus();
       }
     });
-    dialogsArray[index][1].wrapper.attr(a.aHi, a.t);
   };
 
 
@@ -228,13 +231,14 @@
   //This method does not remove the ID set on dialog element
   //-----------------------------------------------
   methods.destroy = function (dialog) {
-    var index = getDialogIndex(dialog);
+    var index = getDialogIndex(dialog),
+        wrapper = dialogsArray[index][1].wrapper;
 
     //remove entry from array
     dialogsArray.splice(index, 1);
 
     //remove all attributes from dialog wrapper
-    dialogsArray[index][1].wrapper.removeAttr(a.r).removeAttr(a.aLi).removeAttr(a.tbI).removeAttr(a.aHi);
+    wrapper.removeAttr(a.r).removeAttr(a.aLi).removeAttr(a.tbI).removeAttr(a.aHi);
   };
 
 
