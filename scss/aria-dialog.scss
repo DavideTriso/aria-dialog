@@ -1,0 +1,124 @@
+//IMPORT
+//-----------------------------
+@import 'breakpoints';
+@import 'placeholders/placeholders';
+@import 'css-mixins/css-mixins';
+//-----------------------------
+
+
+//VARAIBLES
+//-----------------------------
+//Dimensions and general settings
+$dialogWidth: 15rem;
+$dialogPadding: 0.5rem;
+
+//Dialog Style
+$backgroundColor: #fafafa;
+$border: 0.1rem solid #ebebeb;
+$borderRadius:  0.5rem;
+$boxShadow: 0 0 0.2rem 0px rgba(180, 180, 180, 0.5);
+$focusOutline: none;
+
+//Dismiss button position
+$dismissBtnTop: 0.3rem;
+$dismissBtnRight: 0.3rem;
+
+
+//Alert dialog style
+$alertBackgroundColor: #fafafa;
+$alertBorder: 0.2rem solid #bf2020;
+$alertBorderRadius:  0.5rem;
+$alertBoxShadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
+//-----------------------------
+
+
+//CSS STYLES
+//-----------------------------
+
+//BLOCK
+//-----------------------------
+.dialog {
+  @extend %bottom-0;
+  display: none; //do not change this rule!
+  @extend %left-0; 
+  @extend %position-fixed;
+  @extend %right-0;
+  @extend %top-0;
+  @extend %width-100;
+} //do not change this rule!
+ 
+//ELEMENTS
+//-----------------------------
+.dialog__wrapper {
+  @extend %position-fixed;
+  &:focus {
+    outline: $focusOutline;
+  }
+} //do not change this rule!
+
+.dialog__container {
+  background-color: $backgroundColor;
+  border: $border;
+  border-radius: $borderRadius;
+  @include box-shadow($boxShadow);
+  padding: $dialogPadding;
+  position: relative;  //do not change this rule!
+  width: $dialogWidth;
+}
+
+.dialog__header {
+  //
+}
+
+.dialog__heading {
+  //
+}
+.dialog__dismiss-btn {
+  @extend %position-absolute;
+  right: $dismissBtnRight;
+  top: $dismissBtnTop;
+}
+
+.dialog__body {
+  //
+}
+
+.dialog__options {
+  //
+}
+
+.dialog__option-btn {
+  //
+}
+
+//MODIFIERS
+//-----------------------------
+.dialog__container_alert {
+  background-color: $alertBackgroundColor;
+  border: $alertBorder;
+  border-radius: $alertBorderRadius;
+  @include box-shadow($alertBoxShadow);
+}
+
+.dialog__header_alert {
+  //
+}
+
+.dialog__heading_alert {
+  //
+}
+.dialog__dismiss-btn_alert {
+  //
+}
+
+.dialog__body_alert {
+  //
+}
+
+.dialog__options_alert {
+  //
+}
+
+.dialog__option-btn_alert {
+  //
+}

@@ -44,11 +44,7 @@
       left = settings.left === false ? $(window).outerWidth() / 2 - dialogWrapper.outerWidth() / 2 : settings.left;
     dialogWrapper.css({
       'left': left,
-      'top': top,
-      '-webkit-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
-      '-moz-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
-      '-ms-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
-      'transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )'
+      'top': top
     });
   }
 
@@ -70,14 +66,12 @@
         dialogClass: 'dialog',
         dialogWrapperClass: 'dialog__wrapper',
         dialogHeadingClass: 'dialog__heading',
-        dialogType: 'modal', //non-modal (implemented as a simple live region due to missing documentation), modal, alert (alertdialog)
+        dialogType: 'modal', // modal, alert (alertdialog)
         closeWithEsc: false,
         top: false,
         left: false,
-        translateX: 0,
-        translateY: 0,
         zIndex: 100,
-        fadeSpeed: 300
+        fadeSpeed: 100
       }, userSettings),
       elements = {
         dialog: dialog,
@@ -113,9 +107,6 @@
 
     //Set needed attributes to dialog elements
     switch (settings.dialogType) {
-      //case 'non-modal':
-      //  elements.wrapper.attr(a.aLi, 'polite');
-      //  break;
       case 'modal':
         elements.wrapper.attr(a.r, 'dialog');
         break;

@@ -4,12 +4,20 @@
 
 jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 
-Support for **modal dialogs** and **alert dialogs**.
+* Support for **modal dialogs** and **alert dialogs**.
+* Only 3KB (minified).
+* SASS/SCSS files (developed following BEM methodology).
+* Fully compatible with **t-css-framework**
 
 ## Dependencies
 
 **jQuery**
 Developed and tested with jQuery 3.2.1
+
+## Cross-browser tests
+
+* 19. April 2017: Tested on **Google Chrome 57** / macOS Sierra 10.12.4. No issues found.
+* 19. April 2017: Tested on **Mozilla Firefox 50** / macOS Sierra 10.12.4. No issues found.
 
 ## Settings / Options
 
@@ -22,10 +30,8 @@ dialogType | modal |  token | Set type of dialog: modal or alert. For more infor
 closeWithEsc | false | bool | Close dialog when esc key is pressed.
 left | false | false or int | Override default dialog horizontal positioning by setting the css property 'left' for the dialog's wrapper
 top | false | false or int |Override default dialog vertical positioning by setting the css property 'top' for the dialog's wrapper
-translateX | 0 | number | Translate dailog on the X axis by a given percentage to reposition it in viewport.
-translateY | 0 | number | Translate dailog on the Y axis by a given percentage to reposition it in viewport.
 zIndex | 100 | int | Z-index assigned to dialog.
-fadeSpeed | 300 | int (>= 0) | Duration of fade-in and fade-out animations.
+fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
 
 ## Usage
 
