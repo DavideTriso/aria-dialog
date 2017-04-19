@@ -38,17 +38,30 @@
     return index;
   }
 
-
-  function verticallyAlignDialog(dialogWrapper, settings) {
-    var marginTop = $(window).outerHeight() / 2 - dialogWrapper.outerHeight() / 2;
+  //Center dialog in viewport
+  function positionDialog(dialogWrapper, settings) {
+    var top = settings.top === false ? $(window).outerHeight() / 2 - dialogWrapper.outerHeight() / 2 : settings.top,
+      left = settings.left === false ? $(window).outerWidth() / 2 - dialogWrapper.outerWidth() / 2 : settings.left;
     dialogWrapper.css({
-      'margin-top': marginTop,
+      'left': left,
+      'top': top,
       '-webkit-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
       '-moz-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
       '-ms-transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
-      'transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )',
+      'transform': 'translate(' + settings.translateX + '% ,' + settings.translateY + '% )'
     });
   }
+
+
+  //Chek if any modifier key is pressed
+  function checkForSpecialKeys(event) {
+    if (!event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
+      //none is pressed
+      return true;
+    }
+    return false;
+  }
+
   //PLUGIN METHODS
   //INIT DIALOG
   //-----------------------------------------------
@@ -59,7 +72,8 @@
         dialogHeadingClass: 'dialog__heading',
         dialogType: 'modal', //non-modal (implemented as a simple live region due to missing documentation), modal, alert (alertdialog)
         closeWithEsc: false,
-        draggable: false,
+        top: false,
+        left: false,
         translateX: 0,
         translateY: 0,
         zIndex: 100,
@@ -98,7 +112,6 @@
     });
 
     //Set needed attributes to dialog elements
-    //set role (or aria-live as a fallback) on wrapper based on settings
     switch (settings.dialogType) {
       //case 'non-modal':
       //  elements.wrapper.attr(a.aLi, 'polite');
@@ -119,6 +132,7 @@
     //set aria-hidden to true
     elements.wrapper.attr(a.tbI, '0').attr(a.aHi, a.t);
 
+
     //increment count after every initalisation
     count = count + 1;
   };
@@ -129,7 +143,11 @@
   //-----------------------------------------------
   methods.open = function (dialog) {
     var index = getDialogIndex(dialog),
-      focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled');
+      focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled'),
+      dragNow = false,
+      dragInitialOffset = {},
+      screenSize = {},
+      dialogSize = {};
     focussableElements = {
       first: focussableElements.first(),
       last: focussableElements.last()
@@ -142,9 +160,9 @@
     //show dialog    
     dialogsArray[index][1].dialog.show();
     //vertically align dialog
-    verticallyAlignDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
+    positionDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
     $(window).on('resize', function () {
-      verticallyAlignDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
+      positionDialog(dialogsArray[index][1].wrapper, dialogsArray[index][2]);
     });
     //show wrapper
     dialogsArray[index][1].wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1);
@@ -157,14 +175,14 @@
     //manage focus inside dialog
     //trap focus inside modal 
     focussableElements.last.unbind('keydown').on('keydown', function (event) {
-      if (event.keyCode === 9 && !event.shiftKey) {
+      if (event.keyCode === 9 && checkForSpecialKeys(event) === true) {
         event.preventDefault();
         focussableElements.first.focus();
       }
     });
 
     focussableElements.first.unbind('keydown').on('keydown', function (event) {
-      if (event.keyCode === 9 && event.shiftKey) {
+      if (event.keyCode === 9 && event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
         event.preventDefault();
         focussableElements.last.focus();
       }
@@ -174,7 +192,7 @@
     //if closeWithEsc is set to true
     if (dialogsArray[index][2].closeWithEsc) {
       $(window).unbind('keydown').one('keydown', function (event) {
-        if (event.keyCode === 27) {
+        if (event.keyCode === 27 && checkForSpecialKeys(event) === true) {
           methods.close(dialog);
         }
       });
@@ -199,8 +217,8 @@
     dialogsArray[index][1].wrapper.attr(a.aHi, a.t);
   };
 
-  
-  
+
+
   //REMOVE DIALOG
   //-----------------------------------------------
   methods.remove = function (dialog) {
@@ -212,6 +230,8 @@
     //remove elements from DOM
     dialog.remove();
   };
+
+
 
   //DESTROY DIALOG - remove attributes and remove objects from array
   //This method does not remove the ID set on dialog element
@@ -225,6 +245,7 @@
     //remove all attributes from dialog wrapper
     dialogsArray[index][1].wrapper.removeAttr(a.r).removeAttr(a.aLi).removeAttr(a.tbI).removeAttr(a.aHi);
   };
+
 
 
   //PLUGIN
@@ -242,10 +263,14 @@
       methods.close($(this));
     }
     if (userSettings === 'remove') {
-      methods.remove($(this));
+      this.each(function () {
+        methods.remove($(this));
+      });
     }
     if (userSettings === 'destroy') {
-      methods.destroy($(this));
+      this.each(function () {
+        methods.destroy($(this));
+      });
     }
   };
 }(jQuery));

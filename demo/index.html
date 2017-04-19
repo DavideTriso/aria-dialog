@@ -4,7 +4,7 @@
 <head>
   <title>Dialog demo</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="aria-dialog.css"/>
+  <link rel="stylesheet" href="aria-dialog.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="aria-dialog.js"></script>
 </head>
@@ -16,31 +16,33 @@
 
   <div class="dialog" id="dialog-1">
     <section class="dialog__wrapper">
-      <header class="dialog__header">
-        <h2 class="dialog__heading">Dialog heading</h2>
-      </header>
-      <div class="dialog__body">
-        <p>This is a really useful dialog. Close dialog?</p>
-
-        <div class="dialog__options">
-          <button class="dialog__option-btn" type="button" id="btn-yes-1">Yes</button>
-          <button class="dialog__option-btn" type="button" id="btn-no-1">No</button>
+      <div class="dialog__container">
+        <header class="dialog__header">
+          <h2 class="dialog__heading">Dialog heading</h2>
+        </header>
+        <div class="dialog__body">
+          <p>This is a useful dialog. Close dialog?</p>
+          <div class="dialog__options">
+            <button class="dialog__option-btn" type="button" id="btn-yes-1">Yes</button>
+            <button class="dialog__option-btn" type="button" id="btn-no-1">No</button>
+          </div>
         </div>
       </div>
     </section>
   </div>
   <div class="dialog" id="dialog-2">
     <section class="dialog__wrapper">
-      <header class="dialog__header">
-        <h2 class="dialog__heading">Modal title</h2>
-        <button class="dialog__dismiss-btn" id="dismiss-btn-2">X</button>
-      </header>
-      <div class="dialog__body">
-        <p>This is another really useful dialog. Close dialog?</p>
-
-        <div class="dialog__options">
-          <button class="dialog__option-btn" type="button" id="btn-yes-2">Yes</button>
-          <button class="dialog__option-btn" type="button" id="btn-no-2">No</button>
+      <div class="dialog__container">
+        <header class="dialog__header">
+          <h2 class="dialog__heading">Modal title</h2>
+          <button class="dialog__dismiss-btn" id="dismiss-btn-2">X</button>
+        </header>
+        <div class="dialog__body">
+          <p>This is another really useful dialog. Close dialog?</p>
+          <div class="dialog__options">
+            <button class="dialog__option-btn" type="button" id="btn-yes-2">Yes</button>
+            <button class="dialog__option-btn" type="button" id="btn-no-2">No</button>
+          </div>
         </div>
       </div>
     </section>
