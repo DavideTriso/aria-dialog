@@ -35,6 +35,7 @@ left | false | false or int | Override default dialog horizontal positioning by 
 top | false | false or int |Override default dialog vertical positioning by setting the css property 'top' for the dialog's wrapper
 zIndex | 100 | int | Z-index assigned to dialog.
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
+deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin
 
 ## Usage
 

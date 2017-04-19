@@ -275,9 +275,8 @@ $(document).ready(function () {
   'use strict';
   $('#dialog-1').ariaDialog({
     fadeSpeed: 200,
-    closeWithEsc: true,
+    closeWithEsc: true
   });
-
 
   $('#dialog-2').ariaDialog({
     fadeSpeed: 200,
