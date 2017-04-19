@@ -6,7 +6,7 @@ jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 
 * Support for **modal dialogs** and **alert dialogs**.
 * Only 3KB (minified).
-* SASS/SCSS files (developed following BEM methodology).
+* SASS/SCSS files (developed following **BEM principles**).
 * Fully compatible with **t-css-framework**
 
 ## Dependencies
@@ -16,9 +16,9 @@ Developed and tested with jQuery 3.2.1
 
 ## Cross-browser tests
 
-* Tested on **Google Chrome 57** / macOS Sierra 10 No issues found.
-* Tested on **Mozilla Firefox 50** / macOS Sierra 10 No issues found.
-* Tested on **Safari 10** / macOS Sierra 10 No issues found.
+* Tested on **Google Chrome 57** / macOS Sierra 10. No issues found.
+* Tested on **Mozilla Firefox 50** / macOS Sierra 10. No issues found.
+* Tested on **Safari 10** / macOS Sierra 10. No issues found.
 
 
 ## Settings / Options
