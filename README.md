@@ -16,9 +16,9 @@ Developed and tested with jQuery 3.2.1
 
 ## Cross-browser tests
 
-* 19. April 2017: Tested on **Google Chrome 57** / macOS Sierra 10 No issues found.
-* 19. April 2017: Tested on **Mozilla Firefox 50** / macOS Sierra 10 No issues found.
-* 19. April 2017: Tested on **Safari 10** / macOS Sierra 10 No issues found.
+* Tested on **Google Chrome 57** / macOS Sierra 10 No issues found.
+* Tested on **Mozilla Firefox 50** / macOS Sierra 10 No issues found.
+* Tested on **Safari 10** / macOS Sierra 10 No issues found.
 
 
 ## Settings / Options
@@ -37,8 +37,8 @@ fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
 
 ## Usage
 
-1. Include the JS _script aria-dialog.js_ in the head or the body of your HTML file.
-2. Include the CSS file  _aria-dialog.css_ in the head of your HTML file. Adapt the CSS rules to match your website's design.  
+1. Include the JS script **aria-dialog.js** - or the minified production script **aria-dialog.min.js**-  in the head or the body of your HTML file.
+2. Include the CSS file  **aria-dialog.cs** in the head of your HTML file or use the SCSS files. Adapt the CSS rules to match your website's design. 
 3. Initialise the widget within an inline script tag, or in an external JS file.
 
 ### HTML
@@ -65,7 +65,7 @@ Use following HTML markup to generate a dialog:
 </div>
 ```
 
-**IMPORTANT**: if no ID is set on the _.dialog_ element, the plugin automatically generates and sets an ID when a dialog is initialised. Nevertheless, setting an ID to each dialog directly in HTML is recommended, in order to simplify jQuery selectors when calling methods on a dialog.
+**IMPORTANT**: if no ID is set on the **.dialog** element, the plugin automatically generates and sets an ID when a dialog is initialised. Nevertheless, setting an ID to each dialog directly in HTML is **recommended**, in order to simplify jQuery selectors when calling methods on a dialog.
 
 ### JS: Initialise
 
@@ -84,7 +84,7 @@ The plugin supports following methods: open, close, destroy and remove.
 
 ### Open:
 
-To open a dialog call ariaDialog and pass 'open' as parameter:
+To open a dialog call ariaDialog and pass **'open'** as parameter:
 
 ```javascript
 $('#my-dialog').ariaDialog('open');
@@ -92,7 +92,7 @@ $('#my-dialog').ariaDialog('open');
 
 ### Close:
 
-To close a dialog call ariaDialog and pass 'close' as parameter:
+To close a dialog call ariaDialog and pass **'close'** as parameter:
 
 ```javascript
 $('#my-dialog').ariaDialog('close');
@@ -100,17 +100,17 @@ $('#my-dialog').ariaDialog('close');
 
 ### Destroy and remove:
 
-If you want, you can destroy a dialog by passing 'destroy' as a parameter to the function:
+If you want, you can destroy a dialog by passing **'destroy'** as a parameter to the function:
 
 ```javascript
 $('#my-dialog').ariaDialog('destroy');
 ```
 
 Calling 'destroy' will remove all attributes and settings from a dialog, but the dialog will remain in the HTML file.
-If you want to completly remove the dialog from the html, use instead  the 'remove' method:
+If you want to completly remove the dialog from the html, use instead  the **'remove'** method:
 
 ```javascript
 $('#my-dialog').ariaDialog('remove');
 ```
 
-**NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The _open_ and _close_ methods instead can be called only on a single dialog at a time.
+**NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
