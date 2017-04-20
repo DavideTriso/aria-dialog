@@ -20,18 +20,21 @@
   width: 100%; }
 
 .dialog {
+  background-color: rgba(221, 221, 221, 0.5);
   display: none; }
 
-.dialog__wrapper:focus {
-  outline: none; }
+.dialog__wrapper {
+  width: 15rem; }
+  .dialog__wrapper:focus {
+    outline: none; }
 
 .dialog__container {
-  background-color: #fafafa;
+  background-color: #ffffff;
   border: 0.1rem solid #ebebeb;
   border-radius: 0.5rem;
-  -webkit-box-shadow: 0 0 0.2rem 0px rgba(180, 180, 180, 0.5);
-  -moz-box-shadow: 0 0 0.2rem 0px rgba(180, 180, 180, 0.5);
-  box-shadow: 0 0 0.2rem 0px rgba(180, 180, 180, 0.5);
+  -webkit-box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+  -moz-box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+  box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
   padding: 0.5rem;
   position: relative;
   width: 15rem; }
@@ -41,11 +44,11 @@
   top: 0.3rem; }
 
 .dialog__container_alert {
-  background-color: #fafafa;
-  border: 0.2rem solid #bf2020;
+  background-color: #ffffff;
+  border: 0.1rem solid #830909;
   border-radius: 0.5rem;
-  -webkit-box-shadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
-  -moz-box-shadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
-  box-shadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5); }
+  -webkit-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
+  -moz-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
+  box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5); }
 
 /*# sourceMappingURL=aria-dialog.css.map */

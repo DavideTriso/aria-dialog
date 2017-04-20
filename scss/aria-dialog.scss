@@ -9,16 +9,16 @@
 //VARAIBLES
 //-----------------------------
 //Dimensions and general settings
-$dialogWidth: 15rem;
-$dialogPadding: 0.5rem;
+$containerWidth: 15rem;
+$containerPadding: 0.5rem;
 
 //Dialog Style
-$backgroundColor: #fafafa;
-$border: 0.1rem solid #ebebeb;
-$borderRadius:  0.5rem;
-$boxShadow: 0 0 0.2rem 0px rgba(180, 180, 180, 0.5);
-
-//Dialog focus style
+$dialogBackgroundColor: rgba(221, 221, 221, 0.5);
+$containerBackgroundColor: #ffffff;
+$containerBorder: 0.1rem solid #ebebeb;
+$containerBorderRadius:  0.5rem;
+$containerBoxShadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+//Dialog focus outline
 $focusOutline: none;
 
 //Dismiss button position
@@ -27,10 +27,10 @@ $dismissBtnRight: 0.3rem;
 
 
 //Alert dialog style
-$alertBackgroundColor: #fafafa;
-$alertBorder: 0.2rem solid #bf2020;
-$alertBorderRadius:  0.5rem;
-$alertBoxShadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
+$containerAlertBackgroundColor: #ffffff;
+$containerAlertBorder: 0.1rem solid #830909;
+$containerAlertBorderRadius:  0.5rem;
+$containerAlertBoxShadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
 //-----------------------------
 
 
@@ -40,6 +40,7 @@ $alertBoxShadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
 //BLOCK
 //-----------------------------
 .dialog {
+  background-color: $dialogBackgroundColor;
   @extend %bottom-0;
   display: none; //do not change this rule!
   @extend %left-0; 
@@ -53,19 +54,20 @@ $alertBoxShadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
 //-----------------------------
 .dialog__wrapper {
   @extend %position-fixed;
+  width: $containerWidth;
   &:focus {
     outline: $focusOutline;
   }
 } //do not change this rule!
 
 .dialog__container {
-  background-color: $backgroundColor;
-  border: $border;
-  border-radius: $borderRadius;
-  @include box-shadow($boxShadow);
-  padding: $dialogPadding;
+  background-color:$containerBackgroundColor;
+  border: $containerBorder;
+  border-radius: $containerBorderRadius;
+  @include box-shadow($containerBoxShadow);
+  padding: $containerPadding;
   position: relative;  //do not change this rule!
-  width: $dialogWidth;
+  width: $containerWidth;
 }
 
 .dialog__header {
@@ -96,10 +98,10 @@ $alertBoxShadow: 0 0 0.2rem 0px rgba(134, 51, 51, 0.5);
 //MODIFIERS
 //-----------------------------
 .dialog__container_alert {
-  background-color: $alertBackgroundColor;
-  border: $alertBorder;
-  border-radius: $alertBorderRadius;
-  @include box-shadow($alertBoxShadow);
+  background-color: $containerAlertBackgroundColor;
+  border: $containerAlertBorder;
+  border-radius: $containerAlertBorderRadius;
+  @include box-shadow($containerAlertBoxShadow);
 }
 
 .dialog__header_alert {
