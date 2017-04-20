@@ -65,8 +65,10 @@
     var settings = $.extend({
         dialogClass: 'dialog',
         dialogWrapperClass: 'dialog__wrapper',
+        dialogContainerClass: 'dialog__container',
         dialogHeadingClass: 'dialog__heading',
         dialogType: 'modal', // modal, alert (alertdialog)
+        dialogContainerRole: 'document',
         closeWithEsc: false,
         top: false,
         left: false,
@@ -76,6 +78,7 @@
       elements = {
         dialog: dialog,
         wrapper: dialog.find('.' + settings.dialogWrapperClass),
+        container: dialog.find('.' + settings.dialogContainerClass),
         heading: dialog.find('.' + settings.dialogHeadingClass)
       },
       dialogId = '',
@@ -114,6 +117,7 @@
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
     }
+    elements.container.attr(a.r, settings.dialogContainerRole);
 
     //set id on heading if not set and expose relation between heading and dialog wrapper by setting aria-labelledby
     setId(elements.heading, 'dialog-heading-', count);
@@ -197,8 +201,8 @@
   //-----------------------------------------------
   methods.close = function (dialog) {
     var index = getDialogIndex(dialog),
-        dialog = dialogsArray[index][1].dialog,
-        wrapper = dialogsArray[index][1].wrapper;
+      dialog = dialogsArray[index][1].dialog,
+      wrapper = dialogsArray[index][1].wrapper;
 
     //fade out dialog    
     wrapper.attr(a.aHi, a.t).fadeOut(dialogsArray[index][2].fadeSpeed, function () {
@@ -231,7 +235,7 @@
   //-----------------------------------------------
   methods.destroy = function (dialog) {
     var index = getDialogIndex(dialog),
-        wrapper = dialogsArray[index][1].wrapper;
+      wrapper = dialogsArray[index][1].wrapper;
 
     //remove entry from array
     dialogsArray.splice(index, 1);

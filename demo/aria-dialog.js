@@ -65,8 +65,10 @@
     var settings = $.extend({
         dialogClass: 'dialog',
         dialogWrapperClass: 'dialog__wrapper',
+        dialogContainerClass: 'dialog__container',
         dialogHeadingClass: 'dialog__heading',
         dialogType: 'modal', // modal, alert (alertdialog)
+        dialogContainerRole: 'document',
         closeWithEsc: false,
         top: false,
         left: false,
@@ -76,6 +78,7 @@
       elements = {
         dialog: dialog,
         wrapper: dialog.find('.' + settings.dialogWrapperClass),
+        container: dialog.find('.' + settings.dialogContainerClass),
         heading: dialog.find('.' + settings.dialogHeadingClass)
       },
       dialogId = '',
@@ -114,6 +117,7 @@
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
     }
+    elements.container.attr(a.r, settings.dialogContainerRole);
 
     //set id on heading if not set and expose relation between heading and dialog wrapper by setting aria-labelledby
     setId(elements.heading, 'dialog-heading-', count);
