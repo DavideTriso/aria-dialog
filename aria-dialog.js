@@ -253,22 +253,26 @@
       this.each(function () {
         methods.init(userSettings, $(this));
       });
-    }
-    if (userSettings === 'open') {
-      methods.open($(this));
-    }
-    if (userSettings === 'close') {
-      methods.close($(this));
-    }
-    if (userSettings === 'remove') {
-      this.each(function () {
-        methods.remove($(this));
-      });
-    }
-    if (userSettings === 'destroy') {
-      this.each(function () {
-        methods.destroy($(this));
-      });
+      return;
+    } else {
+      switch (userSettings) {
+        case 'open':
+          methods.open($(this));
+          break;
+        case 'close':
+          methods.close($(this));
+          break;
+        case 'remove':
+          this.each(function () {
+            methods.remove($(this));
+          });
+          break;
+        case 'destroy':
+          this.each(function () {
+            methods.destroy($(this));
+          });
+          break;
+      }
     }
   };
 }(jQuery));
