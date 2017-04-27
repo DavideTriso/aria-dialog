@@ -5,8 +5,9 @@
 jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 
 * Support for **modal dialogs** and **alert dialogs**.
+* Easy to customize tanks to a small but usefull set of options.
+* SASS/SCSS files for simple and quick UI customisations.
 * Only 3KB (minified).
-* SASS/SCSS files.
 * Fully compatible with **t-css-framework**
 * Runs in strict mode.
 
@@ -34,11 +35,9 @@ dialogHeadingClass | dialog__heading | string | Class of a dialog heading .
 dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin).
 closeWithEsc | false | bool | Close dialog when esc key is pressed.
 dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/).
-left | false | false or int | Override default dialog horizontal positioning by setting the css property 'left' for the dialog's wrapper
-top | false | false or int |Override default dialog vertical positioning by setting the css property 'top' for the dialog's wrapper
 zIndex | 100 | int | Z-index assigned to dialog.
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
-deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin
+*deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin
 
 ## Usage
 
@@ -111,11 +110,16 @@ If you want, you can destroy a dialog by passing **'destroy'** as a parameter to
 $('#my-dialog').ariaDialog('destroy');
 ```
 
-Calling 'destroy' will remove all attributes and settings from a dialog, but the dialog will remain in the HTML file.
-If you want to completly remove the dialog from the html, use instead  the **'remove'** method:
+Calling 'destroy' will remove all attributes and settings from a dialog, but the dialog will remain in the DOM.
+If you want to completly remove the dialog from the DOM, use instead  the **'remove'** method:
 
 ```javascript
 $('#my-dialog').ariaDialog('remove');
 ```
 
 **NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
+
+
+# LICENSE
+
+**FLOSS** - Free/Libre and Open Source Software.

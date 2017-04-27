@@ -53,7 +53,11 @@ $containerAlertBoxShadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
 //ELEMENTS
 //-----------------------------
 .dialog__wrapper {
+  left: 50%;
+  @extend %max-width-100;
   @extend %position-fixed;
+  top: 50%;
+  @include translate(-50%, -50%);
   width: $containerWidth;
   &:focus {
     outline: $focusOutline;

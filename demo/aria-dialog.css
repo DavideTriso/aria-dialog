@@ -4,6 +4,9 @@
 .dialog {
   left: 0; }
 
+.dialog__wrapper {
+  max-width: 100%; }
+
 .dialog__dismiss-btn {
   position: absolute; }
 
@@ -24,6 +27,13 @@
   display: none; }
 
 .dialog__wrapper {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 15rem; }
   .dialog__wrapper:focus {
     outline: none; }

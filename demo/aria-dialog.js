@@ -38,17 +38,6 @@
     return index;
   }
 
-  //Center dialog in viewport
-  function positionDialog(dialogWrapper, settings) {
-    var top = settings.top === false ? $(window).outerHeight() / 2 - dialogWrapper.outerHeight() / 2 : settings.top,
-      left = settings.left === false ? $(window).outerWidth() / 2 - dialogWrapper.outerWidth() / 2 : settings.left;
-    dialogWrapper.css({
-      'left': left,
-      'top': top
-    });
-  }
-
-
   //Chek if any modifier key is pressed
   function checkForSpecialKeys(event) {
     if (!event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
@@ -70,8 +59,6 @@
         dialogType: 'modal', // modal, alert (alertdialog)
         dialogContainerRole: 'document',
         closeWithEsc: false,
-        top: false,
-        left: false,
         zIndex: 100,
         fadeSpeed: 100
       }, userSettings),
@@ -97,7 +84,7 @@
     /*
     dialogsArray ---> [i] ---> [0] Id of the dialog
                           ---> [1] Object wih elements
-                          ---> [2]  Object with settings 
+                          ---> [2] Object with settings 
     */
 
     //Hide the dialog on init
@@ -116,6 +103,14 @@
       case 'alert':
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
+      /*
+      case 'non-modal':
+        
+        break;
+      case 'lightbox':
+      
+        break;
+      */
     }
     elements.container.attr(a.r, settings.dialogContainerRole);
 
@@ -126,7 +121,6 @@
     //set tabindex to -1 to permit to set focus to the wrapper with JS when dialog is open
     //set aria-hidden to true
     elements.wrapper.attr(a.tbI, '0').attr(a.aHi, a.t);
-
 
     //increment count after every initalisation
     count = count + 1;
@@ -153,21 +147,11 @@
     //get element with focus and store in variable focusEl
     focusEl = $(':focus');
 
-
     //show dialog    
     dialog.show();
-    //vertically align dialog
-    positionDialog(wrapper, dialogsArray[index][2]);
-    $(window).on('resize', function () {
-      positionDialog(wrapper, dialogsArray[index][2]);
-    });
     //show wrapper
-    wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1).attr(a.aHi, a.f);
-
-    //if(dialogsArray[index][2].dialogType !== 'non-modal') {
-    //focus dialog if it is a modal or alert dialog
-    wrapper.focus();
-
+    wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1).attr(a.aHi, a.f).focus();
+    
     //manage focus inside dialog
     //trap focus inside modal 
     focussableElements.last.unbind('keydown').on('keydown', function (event) {
