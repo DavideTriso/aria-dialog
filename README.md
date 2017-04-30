@@ -119,7 +119,8 @@ $('#my-dialog').ariaDialog('remove');
 
 **NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
 
+## LICENSE
 
-# LICENSE
+This project is licensed under the terms of the **MIT license**.
 
-**FLOSS** - Free/Libre and Open Source Software.
+See [LICENSE.md](LICENSE.md) for detailed informations.
