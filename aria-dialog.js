@@ -197,7 +197,7 @@
 
     //enable body scroll
     if (dialogsArray[index][2].preventScroll) {
-      $('body').css('overflow-y', 'scroll');
+      $('body').css('overflow-y', '');
     }
 
     //fade out dialog    
