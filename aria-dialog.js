@@ -60,7 +60,8 @@
         dialogContainerRole: 'document',
         closeWithEsc: false,
         zIndex: 100,
-        fadeSpeed: 100
+        fadeSpeed: 100,
+        preventScroll: true
       }, userSettings),
       elements = {
         dialog: dialog,
@@ -103,14 +104,14 @@
       case 'alert':
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
-      /*
-      case 'non-modal':
-        
-        break;
-      case 'lightbox':
+        /*
+        case 'non-modal':
+          
+          break;
+        case 'lightbox':
       
-        break;
-      */
+          break;
+        */
     }
     elements.container.attr(a.r, settings.dialogContainerRole);
 
@@ -147,11 +148,16 @@
     //get element with focus and store in variable focusEl
     focusEl = $(':focus');
 
+    //prevent body scroll
+    if (dialogsArray[index][2].preventScroll) {
+      $('body').css('overflow-y', 'hidden');
+    }
+
     //show dialog    
     dialog.show();
     //show wrapper
     wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1).attr(a.aHi, a.f).focus();
-    
+
     //manage focus inside dialog
     //trap focus inside modal 
     focussableElements.last.unbind('keydown').on('keydown', function (event) {
@@ -187,6 +193,12 @@
     var index = getDialogIndex(dialog),
       dialog = dialogsArray[index][1].dialog,
       wrapper = dialogsArray[index][1].wrapper;
+
+
+    //enable body scroll
+    if (dialogsArray[index][2].preventScroll) {
+      $('body').css('overflow-y', 'scroll');
+    }
 
     //fade out dialog    
     wrapper.attr(a.aHi, a.t).fadeOut(dialogsArray[index][2].fadeSpeed, function () {

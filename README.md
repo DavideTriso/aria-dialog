@@ -37,6 +37,7 @@ closeWithEsc | false | bool | Close dialog when esc key is pressed.
 dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/).
 zIndex | 100 | int | Z-index assigned to dialog.
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
+preventScroll | true | bool | When a dialog is open, prevent body from scrolling in the background.
 *deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin
 
 ## Usage
