@@ -1,62 +1,64 @@
-/*
-Error: File to import not found or unreadable: 02_css-mixins/import.
-       Load path: /Users/davide/Sites/localserver/biblioteca/aria-dialog/scss
-        on line 7 of scss/aria-dialog.scss
+.dialog {
+  bottom: 0; }
 
-2: //IMPORT
-3: //=============================
-4: 
-5: @import 'breakpoints';
-6: @import '01_placeholders/import';
-7: @import '02_css-mixins/import';
-8: 
-9: 
-10: 
-11: //=============================
-12: //VARAIBLES
+.dialog {
+  left: 0; }
 
-Backtrace:
-scss/aria-dialog.scss:7
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:67:in `rescue in import'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:45:in `import'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:28:in `imported_file'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:37:in `css_import?'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:313:in `visit_import'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `block in with_base'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:115:in `with_frame'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/stack.rb:79:in `with_base'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:160:in `visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `map'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:52:in `visit_children'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `block in visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/base.rb:36:in `visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:159:in `visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/visitors/perform.rb:8:in `visit'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:36:in `css_tree'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:381:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/engine.rb:298:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:492:in `update_stylesheet'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:473:in `on_file_changed'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/plugin/compiler.rb:331:in `block in watch'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:252:in `on_change'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/listener.rb:290:in `block in initialize_adapter'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `call'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapters/polling.rb:48:in `poll_changed_directories'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/vendor/listen/lib/listen/adapter.rb:299:in `block in start_poller'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: File to import not found or unreadable: 02_css-mixins/import.\A        Load path: /Users/davide/Sites/localserver/biblioteca/aria-dialog/scss\A         on line 7 of scss/aria-dialog.scss\A \A 2: //IMPORT\A 3: //=============================\A 4: \A 5: @import 'breakpoints';\A 6: @import '01_placeholders/import';\A 7: @import '02_css-mixins/import';\A 8: \A 9: \A 10: \A 11: //=============================\A 12: //VARAIBLES"; }
+.dialog__wrapper {
+  max-width: 100%; }
+
+.dialog__dismiss-btn {
+  position: absolute; }
+
+.dialog, .dialog__wrapper {
+  position: fixed; }
+
+.dialog {
+  right: 0; }
+
+.dialog {
+  top: 0; }
+
+.dialog {
+  width: 100%; }
+
+.dialog {
+  background-color: rgba(42, 42, 42, 0.8);
+  color: #000;
+  display: none; }
+
+.dialog__wrapper {
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 15rem; }
+
+.dialog__container {
+  background-color: #fff;
+  border: 0.1rem solid #b5b5b5;
+  border-radius: 0;
+  -webkit-box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+  -moz-box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+  box-shadow: 0 0 0.5rem 0px rgba(128, 128, 128, 0.5);
+  padding: 0.5rem;
+  position: relative;
+  width: 15rem; }
+
+.dialog__dismiss-btn {
+  right: 0.3rem;
+  top: 0.3rem; }
+
+.dialog__container_alert {
+  background-color: #ad0d0d;
+  border: 0.1rem solid #8d0909;
+  border-radius: 0;
+  -webkit-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
+  -moz-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
+  box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
+  color: #efefef; }
+
+/*# sourceMappingURL=aria-dialog.css.map */
