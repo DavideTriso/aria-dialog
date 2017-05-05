@@ -99,19 +99,12 @@
     //Set needed attributes to dialog elements
     switch (settings.dialogType) {
       case 'modal':
+      //case 'non-modal':
         elements.wrapper.attr(a.r, 'dialog');
         break;
       case 'alert':
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
-        /*
-        case 'non-modal':
-          
-          break;
-        case 'lightbox':
-      
-          break;
-        */
     }
     elements.container.attr(a.r, settings.dialogContainerRole);
 
@@ -135,11 +128,7 @@
     var index = getDialogIndex(dialog),
       dialog = dialogsArray[index][1].dialog,
       wrapper = dialogsArray[index][1].wrapper,
-      focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled'),
-      dragNow = false,
-      dragInitialOffset = {},
-      screenSize = {},
-      dialogSize = {};
+      focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled');
     focussableElements = {
       first: focussableElements.first(),
       last: focussableElements.last()
@@ -159,7 +148,7 @@
     wrapper.fadeTo(dialogsArray[index][2].fadeSpeed, 1).attr(a.aHi, a.f).focus();
 
     //manage focus inside dialog
-    //trap focus inside modal 
+    //trap focus inside modal
     focussableElements.last.unbind('keydown').on('keydown', function (event) {
       if (event.keyCode === 9 && checkForSpecialKeys(event) === true) {
         event.preventDefault();
@@ -173,6 +162,7 @@
         focussableElements.last.focus();
       }
     });
+
 
     //close dialog when escape is pressed
     //if closeWithEsc is set to true
