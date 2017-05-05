@@ -1,9 +1,8 @@
 /*
-Error: File to import not found or unreadable: 01_placeholders/import.
+Error: File to import not found or unreadable: 02_css-mixins/import.
        Load path: /Users/davide/Sites/localserver/biblioteca/aria-dialog/scss
-        on line 6 of scss/aria-dialog.scss
+        on line 7 of scss/aria-dialog.scss
 
-1: //=============================
 2: //IMPORT
 3: //=============================
 4: 
@@ -14,9 +13,10 @@ Error: File to import not found or unreadable: 01_placeholders/import.
 9: 
 10: 
 11: //=============================
+12: //VARAIBLES
 
 Backtrace:
-scss/aria-dialog.scss:6
+scss/aria-dialog.scss:7
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:67:in `rescue in import'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:45:in `import'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.22/lib/sass/tree/import_node.rb:28:in `imported_file'
@@ -59,4 +59,4 @@ scss/aria-dialog.scss:6
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: File to import not found or unreadable: 01_placeholders/import.\A        Load path: /Users/davide/Sites/localserver/biblioteca/aria-dialog/scss\A         on line 6 of scss/aria-dialog.scss\A \A 1: //=============================\A 2: //IMPORT\A 3: //=============================\A 4: \A 5: @import 'breakpoints';\A 6: @import '01_placeholders/import';\A 7: @import '02_css-mixins/import';\A 8: \A 9: \A 10: \A 11: //============================="; }
+  content: "Error: File to import not found or unreadable: 02_css-mixins/import.\A        Load path: /Users/davide/Sites/localserver/biblioteca/aria-dialog/scss\A         on line 7 of scss/aria-dialog.scss\A \A 2: //IMPORT\A 3: //=============================\A 4: \A 5: @import 'breakpoints';\A 6: @import '01_placeholders/import';\A 7: @import '02_css-mixins/import';\A 8: \A 9: \A 10: \A 11: //=============================\A 12: //VARAIBLES"; }
