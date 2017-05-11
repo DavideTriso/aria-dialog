@@ -26,19 +26,19 @@ Developed and tested with jQuery 3.2.1
 
 ## Settings / Options
 
-Name | Default | Type | Description
------|---------|------|-------------
-dialogClass | dialog | string | Class of a dialog element.
-dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper.
-dialogContainerClass | dialog__container | string | Class of a dialog container.
-dialogHeadingClass | dialog__heading | string | Class of a dialog heading .
-dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin).
-closeWithEsc | false | bool | Close dialog when esc key is pressed.
-dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/).
-zIndex | 100 | int | Z-index assigned to dialog.
-fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations.
-preventScroll | true | bool | When a dialog is open, prevent body from scrolling in the background.
-*deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin
+Name | Default | Type | Description | Required or optional
+-----|---------|------|-------------|----------
+dialogClass | dialog | string | Class of a dialog element. | optional
+dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper. | optional
+dialogContainerClass | dialog__container | string | Class of a dialog container. | optional
+dialogHeadingClass | dialog__heading | string | Class of a dialog heading. | optional
+dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin). | optional
+closeWithEsc | false | bool | Close dialog when esc key is pressed. | optional (recommended value: true)
+dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/). | optional
+zIndex | 100 | int | Z-index assigned to dialog. | optional
+fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations. | optional
+preventScroll | true | bool | When a dialog is open, prevent body from scrolling in the background. | optional
+*deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin | optional
 
 ## Usage
 
@@ -119,6 +119,11 @@ $('#my-dialog').ariaDialog('remove');
 ```
 
 **NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
+
+
+## Inject dialogs dinamically
+
+A compatible **extension to dynamically generate and inject dialogs in the DOM** is provided at [https://github.com/DavideTriso/aria-dialog-generator](https://github.com/DavideTriso/aria-dialog-generator).
 
 ## LICENSE
 
