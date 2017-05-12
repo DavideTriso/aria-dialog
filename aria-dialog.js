@@ -95,7 +95,7 @@
     elements.wrapper.css({
       opacity: 0
     });
-
+ 
     //Set needed attributes to dialog elements
     switch (settings.dialogType) {
       case 'modal':
