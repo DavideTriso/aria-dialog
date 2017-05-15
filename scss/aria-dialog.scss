@@ -50,7 +50,7 @@ $ariaDialog--containerAlertBoxShadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   left: 50%;
   @extend %max-width-100;
   @extend %position-fixed;
-  top: 50%;
+  top: 47%; 
   @include translate(-50%, -50%);
   width: $ariaDialog--containerWidth;
 } //do not change this rule!

@@ -22,6 +22,11 @@
 .dialog {
   width: 100%; }
 
+/*
+@mixins align-self ($value) {
+  -webkit-align-self: $value;
+  align-self: $value;
+}*/
 .dialog {
   background-color: rgba(42, 42, 42, 0.8);
   color: #000;
@@ -29,7 +34,7 @@
 
 .dialog__wrapper {
   left: 50%;
-  top: 50%;
+  top: 47%;
   -webkit-transform: translate(-50%, -50%);
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
