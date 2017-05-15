@@ -8,7 +8,7 @@ jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 * Easy to customize tanks to a small but usefull set of options.
 * SASS/SCSS files for simple and quick UI customisations.
 * Only 3KB (minified).
-* Fully compatible with **t-css-framework**
+* Fully compatible with [**t** css-framework](https://github.com/DavideTriso/t-css-framework)
 * Runs in strict mode.
 
 ## Dependencies
