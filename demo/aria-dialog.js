@@ -59,6 +59,7 @@
         dialogType: 'modal', // modal, alert (alertdialog)
         dialogContainerRole: 'document',
         closeWithEsc: false,
+        closeOnBgClick: false,
         zIndex: 100,
         fadeSpeed: 100,
         preventScroll: true
@@ -95,11 +96,11 @@
     elements.wrapper.css({
       opacity: 0
     });
- 
+
     //Set needed attributes to dialog elements
     switch (settings.dialogType) {
       case 'modal':
-      //case 'non-modal':
+        //case 'non-modal':
         elements.wrapper.attr(a.r, 'dialog');
         break;
       case 'alert':
@@ -171,6 +172,15 @@
         if (event.keyCode === 27 && checkForSpecialKeys(event) === true) {
           methods.close(dialog);
         }
+      });
+    }
+    //close dialog if user clicks on bg
+    if (dialogsArray[index][2].closeOnBgClick) {
+      dialog.on('click', function (event) {
+        methods.close(dialog);
+      });
+      wrapper.on('click', function (event) {
+        event.stopPropagation();
       });
     }
   };
@@ -269,7 +279,8 @@ $(document).ready(function () {
   'use strict';
   $('#dialog-1').ariaDialog({
     fadeSpeed: 200,
-    closeWithEsc: true
+    closeWithEsc: true,
+    closeOnBgClick: true
   });
 
   $('#dialog-2').ariaDialog({

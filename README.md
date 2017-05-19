@@ -34,6 +34,7 @@ dialogContainerClass | dialog__container | string | Class of a dialog container.
 dialogHeadingClass | dialog__heading | string | Class of a dialog heading. | optional
 dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin). | optional
 closeWithEsc | false | bool | Close dialog when esc key is pressed. | optional (recommended value: true)
+closeOnBgClick | false | bool | Close dialog if user clicks on dialog background | optional
 dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/). | optional
 zIndex | 100 | int | Z-index assigned to dialog. | optional
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations. | optional
