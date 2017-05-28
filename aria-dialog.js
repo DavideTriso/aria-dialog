@@ -51,19 +51,7 @@
   //INIT DIALOG
   //-----------------------------------------------
   methods.init = function (userSettings, dialog) {
-    var settings = $.extend({
-        dialogClass: 'dialog',
-        dialogWrapperClass: 'dialog__wrapper',
-        dialogContainerClass: 'dialog__container',
-        dialogHeadingClass: 'dialog__heading',
-        dialogType: 'modal', // modal, alert (alertdialog)
-        dialogContainerRole: 'document',
-        closeWithEsc: false,
-        closeOnBgClick: false,
-        zIndex: 100,
-        fadeSpeed: 100,
-        preventScroll: true
-      }, userSettings),
+    var settings = $.extend({},  $.fn.ariaDialog.defaultSettings, userSettings),
       elements = {
         dialog: dialog,
         wrapper: dialog.find('.' + settings.dialogWrapperClass),
@@ -271,4 +259,18 @@
       }
     }
   };
+
+  $.fn.ariaDialog.defaultSettings = {
+    dialogClass: 'dialog',
+    dialogWrapperClass: 'dialog__wrapper',
+    dialogContainerClass: 'dialog__container',
+    dialogHeadingClass: 'dialog__heading',
+    dialogType: 'modal', // modal, alert (alertdialog)
+    dialogContainerRole: 'document',
+    closeWithEsc: false,
+    closeOnBgClick: false,
+    zIndex: 100,
+    fadeSpeed: 100,
+    preventScroll: true
+  }
 }(jQuery));
