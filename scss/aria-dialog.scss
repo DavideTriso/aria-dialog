@@ -63,6 +63,7 @@ $ariaDialog--containerAlertBoxShadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
     border-radius: $ariaDialog--containerBorderRadius;
   }
   @include box-shadow($ariaDialog--containerBoxShadow);
+  @extend %box-sizing-border-box;
   padding: $ariaDialog--containerPadding;
   position: relative; //do not change this rule!
   width: $ariaDialog--containerWidth;

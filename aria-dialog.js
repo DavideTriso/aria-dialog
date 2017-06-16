@@ -213,10 +213,10 @@
     } else {
       switch (userSettings) {
         case 'open':
-          methods.open($(this));
+          methods.open($(this[0]));
           break;
         case 'close':
-          methods.close($(this));
+          methods.close($(this[0]));
           break;
         case 'remove':
           this.each(function () {
