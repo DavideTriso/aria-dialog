@@ -3,6 +3,7 @@
   var methods = {},
     count = 0,
     focusEl = '',
+    body = $('body'),
     a = {
       r: 'role',
       aHi: 'aria-hidden',
@@ -66,16 +67,16 @@
       });
     }
 
-    //Set needed attributes to dialog elements
+    //Set needed attributes to dialog
     switch (settings.dialogType) {
       case 'modal':
-        //case 'non-modal':
         elements.wrapper.attr(a.r, 'dialog');
         break;
       case 'alert':
         elements.wrapper.attr(a.r, 'alertdialog');
         break;
     }
+
     elements.container.attr(a.r, settings.dialogContainerRole);
 
     //set id on heading if not set and expose relation between heading and dialog wrapper by setting aria-labelledby
@@ -109,7 +110,7 @@
 
     //prevent body scroll
     if (settings.preventScroll) {
-      $('body').css('overflow-y', 'hidden');
+      body.addClass('aria-dialog_no-scroll');
     }
 
     //add open classes to dialog and wrapper
@@ -147,7 +148,7 @@
     //close dialog when escape is pressed
     //if closeWithEsc is set to true
     if (settings.closeWithEsc) {
-      $(window).off('keydown').one('keydown', function (event) {
+      $(window).one('keydown', function (event) {
         if (event.keyCode === 27 && checkForSpecialKeys(event) === true) {
           methods.close(dialog);
         }
@@ -175,9 +176,8 @@
 
     //enable body scroll
     if (settings.preventScroll) {
-      $('body').css('overflow-y', '');
+      body.removeClass('aria-dialog_no-scroll');
     }
-
 
     //add open classes to dialog and wrapper
     //and set aria-hidden to false to expose dialog to AI

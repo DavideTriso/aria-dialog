@@ -66,4 +66,9 @@
   box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   color: #efefef; }
 
+
+.aria-dialog_no-scroll {
+  overflow-y: hidden; }
+
+
 /*# sourceMappingURL=aria-dialog.css.map */
