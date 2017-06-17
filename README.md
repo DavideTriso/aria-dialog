@@ -133,6 +133,14 @@ By default the plugin is configured to use JS to show/hide dialogs. Setting the 
 
 A compatible **extension to dynamically generate and inject dialogs in the DOM** is provided at [https://github.com/DavideTriso/aria-dialog-generator](https://github.com/DavideTriso/aria-dialog-generator).
 
+
+## Future plans
+
+* Support for non-modal dialogs.
+* Better SCSS: Mixins to quickly build awesome dialogs will be provided.
+* Better integration with **t** css framework.
+* Hash navigation and deep linking.
+
 ## LICENSE
 
 This project is licensed under the terms of the **MIT license**.
