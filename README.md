@@ -33,12 +33,14 @@ dialogClass | dialog | string | Class of a dialog element. | optional
 dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper. | optional
 dialogContainerClass | dialog__container | string | Class of a dialog container. | optional
 dialogHeadingClass | dialog__heading | string | Class of a dialog heading. | optional
+dialogOpenClass | dialog_open | string | Class added to an open dialog | optional
+dialogWrapperOpenClass | dialog__wrapper_open | string | Class added to a dialog wrapper, when the dialog is open | optional
 dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin). | optional
 closeWithEsc | false | bool | Close dialog when esc key is pressed. | optional (recommended value: true)
 closeOnBgClick | false | bool | Close dialog if user clicks on dialog background | optional
 dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/). | optional
-zIndex | 100 | int | Z-index assigned to dialog. | optional
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations. | optional
+cssTransitions | false | bool | Use css transitions to show/hide dialog instead of jQuery fade animation. Read section 'Using CSS transitions' for more infos | optional
 preventScroll | true | bool | When a dialog is open, prevent body from scrolling in the background. | optional
 *deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin | optional
 
@@ -122,6 +124,10 @@ $('#my-dialog').ariaDialog('remove');
 
 **NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
 
+
+## Using CSS transitions
+
+By default the plugin is configured to use JS to show/hide dialogs. Setting the option **cssTransitions** to 'true' will disable the JS animations and it is possible to implement show/hide animations directly in the css. In fact, the plugin toggles the classes passed along with the options **dialogOpenClass** and **dialogWrapperOpenClass** when the dialog is toggled.
 
 ## Inject dialogs dinamically
 

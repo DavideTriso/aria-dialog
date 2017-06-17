@@ -10,7 +10,10 @@
   left: 0; }
 
 .dialog__wrapper {
-  max-width: 100%; }
+  max-width: 100%;
+  opacity: 0;
+  transition: all 1s ease-in;
+}
 
 .dialog__dismiss-btn {
   position: absolute; }
@@ -70,5 +73,14 @@
   -moz-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   color: #efefef; }
+
+
+.dialog_open {
+  display: block;
+}
+
+.dialog__wrapper_open {
+  opacity: 1;
+}
 
 /*# sourceMappingURL=aria-dialog.css.map */

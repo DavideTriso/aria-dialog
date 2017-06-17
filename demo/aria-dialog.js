@@ -56,13 +56,15 @@
     //append all data to jquery object
     dialog.data('dialogArray', dialogArray);
 
+
     //Hide the dialog on init
-    elements.dialog.hide().css({
-      'z-index': settings.zIndex
-    });
-    elements.wrapper.css({
-      opacity: 0
-    });
+    //if the plugin is not configured to use css transitions
+    if (!settings.cssTransitions) {
+      elements.dialog.hide();
+      elements.wrapper.css({
+        opacity: 0
+      });
+    }
 
     //Set needed attributes to dialog elements
     switch (settings.dialogType) {
@@ -110,10 +112,20 @@
       $('body').css('overflow-y', 'hidden');
     }
 
-    //show dialog    
-    dialog.show();
-    //show wrapper
-    wrapper.fadeTo(settings.fadeSpeed, 1).attr(a.aHi, a.f).focus();
+    //add open classes to dialog and wrapper
+    //and set aria-hidden to false to expose dialog to AI
+    dialog.addClass(settings.dialogOpenClass);
+    wrapper.addClass(settings.dialogWrapperOpenClass).attr(a.aHi, a.f).focus();
+
+
+    //if the plugin is configured to use css transitions,
+    //then do not perform any js animation.
+    if (!settings.cssTransitions) {
+      //show dialog    
+      dialog.show();
+      //show wrapper
+      wrapper.fadeTo(settings.fadeSpeed, 1);
+    }
 
     //manage focus inside dialog
     //trap focus inside modal
@@ -166,14 +178,25 @@
       $('body').css('overflow-y', '');
     }
 
-    //fade out dialog    
-    wrapper.attr(a.aHi, a.t).fadeOut(settings.fadeSpeed, function () {
-      dialog.hide();
-      //move focus back to element that had focus before dialog was opened
-      if (focusEl !== '') {
-        focusEl.focus();
-      }
-    });
+
+    //add open classes to dialog and wrapper
+    //and set aria-hidden to false to expose dialog to AI
+    dialog.removeClass(settings.dialogOpenClass);
+    wrapper.removeClass(settings.dialogWrapperOpenClass).attr(a.aHi, a.t).focus();
+
+    //move focus back to element that had focus before dialog was opened
+    if (focusEl !== '') {
+      focusEl.focus();
+    }
+
+    //if the plugin is configured to use css transitions,
+    //then do not perform any js animation.
+    if (!settings.cssTransitions) {
+      //fade out dialog    
+      wrapper.fadeOut(settings.fadeSpeed, function () {
+        dialog.hide();
+      });
+    }
   };
 
 
@@ -237,12 +260,14 @@
     dialogWrapperClass: 'dialog__wrapper',
     dialogContainerClass: 'dialog__container',
     dialogHeadingClass: 'dialog__heading',
+    dialogOpenClass: 'dialog_open',
+    dialogWrapperOpenClass: 'dialog__wrapper_open',
     dialogType: 'modal', // modal, alert (alertdialog)
     dialogContainerRole: 'document',
     closeWithEsc: false,
     closeOnBgClick: false,
-    zIndex: 100,
     fadeSpeed: 100,
+    cssTransitions: false,
     preventScroll: true
   }
 }(jQuery));
