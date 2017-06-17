@@ -1,19 +1,11 @@
 .dialog {
   bottom: 0; }
 
-.dialog__container {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box; }
-
 .dialog {
   left: 0; }
 
 .dialog__wrapper {
-  max-width: 100%;
-  opacity: 0;
-  transition: all 1s ease-in;
-}
+  max-width: 100%; }
 
 .dialog__dismiss-btn {
   position: absolute; }
@@ -73,14 +65,5 @@
   -moz-box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   box-shadow: 0 0 0.5rem 0px rgba(145, 20, 20, 0.5);
   color: #efefef; }
-
-
-.dialog_open {
-  display: block;
-}
-
-.dialog__wrapper_open {
-  opacity: 1;
-}
 
 /*# sourceMappingURL=aria-dialog.css.map */
