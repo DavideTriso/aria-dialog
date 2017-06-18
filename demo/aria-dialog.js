@@ -19,7 +19,7 @@
 
   function setId(element, id, i) {
     if (!element.is('[id]')) {
-      element.attr('id', id + (i + 1));
+      element.attr('id', `${id}${i + 1}`);
     }
   }
 
@@ -130,14 +130,14 @@
 
     //manage focus inside dialog
     //trap focus inside modal
-    focussableElements.last.off('keydown').on('keydown', function (event) {
+    focussableElements.last.off('keydown.ariaDialog').on('keydown.ariaDialog', function (event) {
       if (event.keyCode === 9 && checkForSpecialKeys(event) === true) {
         event.preventDefault();
         focussableElements.first.focus();
       }
     });
 
-    focussableElements.first.off('keydown').on('keydown', function (event) {
+    focussableElements.first.off('keydown.ariaDialog').on('keydown.ariaDialog', function (event) {
       if (event.keyCode === 9 && event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
         event.preventDefault();
         focussableElements.last.focus();
@@ -148,7 +148,7 @@
     //close dialog when escape is pressed
     //if closeWithEsc is set to true
     if (settings.closeWithEsc) {
-      $(window).one('keydown', function (event) {
+      $(window).one('keydown.ariaDialog', function (event) {
         if (event.keyCode === 27 && checkForSpecialKeys(event) === true) {
           methods.close(dialog);
         }
@@ -156,10 +156,10 @@
     }
     //close dialog if user clicks on bg
     if (settings.closeOnBgClick) {
-      dialog.on('click', function (event) {
+      dialog.on('click.ariaDialog', function (event) {
         methods.close(dialog);
       });
-      wrapper.on('click', function (event) {
+      wrapper.on('click.ariaDialog', function (event) {
         event.stopPropagation();
       });
     }
