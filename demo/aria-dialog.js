@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, window) {
   'use strict';
   var methods = {},
     count = 0,
@@ -270,7 +270,7 @@
     cssTransitions: false,
     preventScroll: true
   }
-}(jQuery));
+}(jQuery, window));
 
 
 
