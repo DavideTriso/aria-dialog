@@ -19,7 +19,7 @@
 
   function setId(element, id, i) {
     if (!element.is('[id]')) {
-      element.attr('id', `${id}${i + 1}`);
+      element.attr('id', id + (i + 1));
     }
   }
 
