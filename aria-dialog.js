@@ -1,273 +1,447 @@
-(function ($, window) {
+/*
+MIT License
+
+Copyright (c) 2017 Davide Trisolini
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
+(function ($, window, document) {
   'use strict';
-  var methods = {},
-    count = 0,
-    focusEl = '',
-    body = $('body'),
+
+  var pluginName = 'ariaDialog', // the name of the plugin
+    count = 0, //a plugin global variable used to generate IDs
     a = {
       r: 'role',
+      aMo: 'aria-modal',
       aHi: 'aria-hidden',
       aLab: 'aria-labelledby',
+      aDes: 'aria-describedby',
       tbI: 'tabindex',
       aLi: 'aria-live',
       t: 'true',
       f: 'false'
-    };
+    },
+    win = $(window); //object containing wai aria and html attributes
 
-  //PRIVATE FUNCTIONS
-  //-----------------------------------------------
 
-  function setId(element, id, i) {
+  //-----------------------------------------
+  //Private functions
+  /*
+   * set id of the element passed along
+   * if the element does not have one
+   * and return the id of the element
+   * If no suffix is passed, then do not set it
+   */
+  function setId(element, idPrefix, idSuffix) {
+    idSuffix = idSuffix !== undefined ? idSuffix : '';
+
     if (!element.is('[id]')) {
-      element.attr('id', id + (i + 1));
+      element.attr('id', idPrefix + idSuffix);
     }
+    return element.attr('id');
   }
 
 
-  //Chek if any modifier key is pressed
-  function checkForSpecialKeys(event) {
+  /*
+   * Check if any of the four modifiers keys are pressed.
+   * If none is pressed, return true.
+   * Else return false
+   */
+  function checkForModifierKeys(event) {
     if (!event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
       //none is pressed
-      return true;
+      return 'none';
+    } else if (event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
+      return 'shift';
     }
     return false;
   }
 
-  //PLUGIN METHODS
-  //INIT DIALOG
-  //-----------------------------------------------
-  methods.init = function (userSettings, dialog) {
-    var settings = $.extend({}, $.fn.ariaDialog.defaultSettings, userSettings),
-      elements = {
-        dialog: dialog,
-        wrapper: dialog.find('.' + settings.dialogWrapperClass),
-        container: dialog.find('.' + settings.dialogContainerClass),
-        heading: dialog.find('.' + settings.dialogHeadingClass)
-      },
-      dialogId = '',
-      dialogArray = [];
+  /*
+   * Return the first and last focussable elements contained
+   * inside an element and return object with this two elements
+   */
+  function getFocussableElements(element) {
+    return element.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled');
+  }
 
-    //Set id on dialog if not set and save id into variable dialogId
-    setId(elements.dialog, 'dialog-', count);
-    dialogId = elements.dialog.attr('id');
+  //-----------------------------------------
+  // The actual plugin constructor
+  function AriaDialog(element, userSettings) {
+    var self = this;
 
-    //save all dialog data into array
-    dialogArray = [dialogId, elements, settings];
-
-    //append all data to jquery object
-    dialog.data('dialogArray', dialogArray);
-
-
-    //Hide the dialog on init
-    //if the plugin is not configured to use css transitions
-    if (!settings.cssTransitions) {
-      elements.dialog.hide();
-      elements.wrapper.css({
-        opacity: 0
-      });
-    }
-
-    //Set needed attributes to dialog
-    switch (settings.dialogType) {
-      case 'modal':
-        elements.wrapper.attr(a.r, 'dialog');
-        break;
-      case 'alert':
-        elements.wrapper.attr(a.r, 'alertdialog');
-        break;
-    }
-
-    elements.container.attr(a.r, settings.dialogContainerRole);
-
-    //set id on heading if not set and expose relation between heading and dialog wrapper by setting aria-labelledby
-    setId(elements.heading, 'dialog-heading-', count);
-    elements.wrapper.attr(a.aLab, elements.heading.attr('id'));
-
-    //set tabindex to -1 to permit to set focus to the wrapper with JS when dialog is open
-    //set aria-hidden to true
-    elements.wrapper.attr(a.tbI, '0').attr(a.aHi, a.t);
-
-    //increment count after every initalisation
-    count = count + 1;
-  };
-
-
-
-  //OPEN DIALOG
-  //-----------------------------------------------
-  methods.open = function (dialog) {
-    var dialog = dialog.data('dialogArray')[1].dialog,
-      wrapper = dialog.data('dialogArray')[1].wrapper,
-      settings = dialog.data('dialogArray')[2],
-      focussableElements = dialog.find('a[href], area[href], button:enabled, input:enabled, textarea:enabled, select:enabled, optgroup:enabled, option:enabled, menuitem:enabled, fieldset:enabled');
-    focussableElements = {
-      first: focussableElements.first(),
-      last: focussableElements.last()
+    self.settings = $.extend({}, $.fn[pluginName].defaultSettings, userSettings);
+    self.element = $(element); //The dialog
+    self.elementId = setId(self.element, self.settings.dialogIdPrefix, count); // The id of the dialog
+    self.elementState = false; //the state of the dialog (visible -> true, hidden -> false)
+    self.elements = {
+      wrapper: self.element.find('.' + self.settings.wrapperClass),
+      container: self.element.find('.' + self.settings.containerClass),
+      heading: self.element.find('.' + self.settings.headingClass),
+      mainMessage: self.element.find('.' + self.settings.mainMessageClass).first()
     };
 
-    //get element with focus and store in variable focusEl
-    focusEl = $(':focus');
 
-    //prevent body scroll
-    if (settings.preventScroll) {
-      body.addClass('aria-dialog_no-scroll');
-    }
+    //Initialise the widget
+    self.init();
+  }
 
-    //add open classes to dialog and wrapper
-    //and set aria-hidden to false to expose dialog to AI
-    dialog.addClass(settings.dialogOpenClass);
-    wrapper.addClass(settings.dialogWrapperOpenClass).attr(a.aHi, a.f).focus();
+  // Avoid Plugin.prototype conflicts
+  $.extend(AriaDialog.prototype, {
+    init: function () {
 
+      var self = this,
+        settings = self.settings,
+        element = self.element,
+        elements = self.elements,
+        wrapper = elements.wrapper;
 
-    //if the plugin is configured to use css transitions,
-    //then do not perform any js animation.
-    if (!settings.cssTransitions) {
-      //show dialog    
-      dialog.show();
-      //show wrapper
-      wrapper.fadeTo(settings.fadeSpeed, 1);
-    }
+      /*
+       * if the plugin is configured to use css transitions,
+       * then we do not need to hide it with js
+       */
 
-    //manage focus inside dialog
-    //trap focus inside modal
-    focussableElements.last.off('keydown.ariaDialog').on('keydown.ariaDialog', function (event) {
-      if (event.keyCode === 9 && checkForSpecialKeys(event) === true) {
-        event.preventDefault();
-        focussableElements.first.focus();
+      if (!settings.cssTransitions) {
+        element.hide();
+        wrapper.hide();
       }
-    });
 
-    focussableElements.first.off('keydown.ariaDialog').on('keydown.ariaDialog', function (event) {
-      if (event.keyCode === 9 && event.shiftKey && !event.ctrlKey && !event.altKey && !event.metaKey) {
-        event.preventDefault();
-        focussableElements.last.focus();
+      /*
+       * Set needed attributes to dialog:
+       * We need to set some attributes to expose the semantic to AT and make the dialog accessible.
+       * The plugin supports 3 different types of dialogs: modal, non-modal and alert.
+       * Each implementation need slightly different semantic
+       */
+      switch (settings.dialogType) {
+        case 'modal':
+          wrapper
+            .attr(a.r, 'dialog')
+            .attr(a.aMo, a.t); //a modal dialog
+          break;
+        case 'alert':
+          wrapper
+            .attr(a.r, 'alertdialog')
+            .attr(a.aMo, a.t); //an alert dialog
+          break;
+          /* Design patterns for non modal dialogs were not yet defined in WAI ARIA
+          * Support will be added in future versions of the plugin
+          case 'non-modal':
+            wrapper
+              .attr(a.r, 'dialog')
+              .attr(a.aMo, a.f); //a non modal dialog
+            break;
+            */
       }
-    });
 
 
-    //close dialog when escape is pressed
-    //if closeWithEsc is set to true
-    if (settings.closeWithEsc) {
-      $(window).one('keydown.ariaDialog', function (event) {
-        if (event.keyCode === 27 && checkForSpecialKeys(event) === true) {
-          methods.close(dialog);
+      /*
+       * For the dialog to be accessible, it is important to expose the  
+       * relation between dialog wrapper (element with role of dialog - or alertdialog)
+       * and the heading of the dialog with aria-labelledby
+       * In order to reference the id of the heading in the attribute aria-labelledby,
+       * we have to check if the heading has an id, if not set it.
+       * 
+       * Because the dialog is initially hidden, we set aria-hidden to true
+       *
+       * Because some implementations of dialogs need the wrapper to get focus when the dialog is opened,
+       * we set a tabindex of -1 on the wrapper to make it focussable with scripting.
+       */
+      wrapper
+        .attr(a.aLab, setId(elements.heading, self.elementId + '__heading'))
+        .attr(a.aHi, a.t)
+        .attr(a.tbI, '-1');
+
+      /*
+       * If the dialog contains an element marked with the class of mainMessage, then it is good practice
+       * to expose the relation between dialog and message with the attribute aria-describedby
+       * We do the same operations as for the heading, if the message is present
+       */
+      if (elements.mainMessage.length === 1) {
+        wrapper.attr(a.aDes, setId(elements.mainMessage, self.elementId + '__main-message'));
+      }
+
+      /*
+       * Get focussable elements and append to elements object.
+       * We need to know wich elements are focussable inside the dialog, in order
+       * to manage focus in the dialog and check if the element to set focus on
+       * when the dialog is open is focussable.
+       */
+      elements.focussableElements = getFocussableElements(wrapper);
+
+      /*
+       * Get the element to focus inside the dialog (setFocusOn), when the dialog is open.
+       * Expected value is a selector string.
+       * We perform a call to the jQuery function and get the element.
+       */
+      elements.elementToFocus = wrapper.find(settings.setFocusOn);
+
+      /*
+       * Now we perform some checks on the element to set focus on, to make sure it is:
+       * - a single jQuery element object (no collection and non empty),
+       * - a child element of the dialog.
+       * - focussable
+       */
+
+      if (typeof elements.elementToFocus !== 'object' ||
+        elements.elementToFocus.length !== 1 ||
+        elements.elementToFocus.closest(self.element).length !== 1 || elements.focussableElements.index(elements.elementToFocus) < 0) {
+        throw new Error('Check value of \'setFocusOn\' option.');
+      }
+
+
+      /*
+       * Enable deep linking by watching for hash changes
+       * whenewer a hash change happens, we must check if the hash
+       * matches the id of the dialog.
+       * If yes, then the dialog must be opened, else closed.
+       */
+      if (settings.deepLinking) {
+        self.deepLinkingController();
+
+        win.on('hashchange', function () {
+          if (document.location.hash === '#' + self.elementId) {
+            self.show();
+          } else if (self.elementState) {
+            self.deepLinkingController();
+          }
+        });
+      }
+
+
+      //increment count after every initalisation
+      count = count + 1;
+    },
+    show: function () {
+      var self = this,
+        element = self.element,
+        elements = self.elements,
+        wrapper = elements.wrapper,
+        settings = self.settings,
+        focussableElements = getFocussableElements(wrapper),
+        firstFocussableElement = focussableElements.first(),
+        lastFocussableElement = focussableElements.last();
+
+      self.elementWithFocus = $(':focus'); //the element with focus just before the dialog is opened
+
+
+      /*
+       * if the plugin is configured to use css transitions,
+       * then we do not need to perform any animation on the dialog
+       */
+      if (!settings.cssTransitions) {
+        element.show();
+        wrapper
+          .stop()
+          .fadeIn(settings.fadeSpeed);
+      }
+
+      //add open classes to dialog
+      element.addClass(settings.dialogOpenClass);
+
+      //add open class on wrapper and  set aria-hidden to false to expose dialog to AI
+      wrapper
+        .addClass(settings.wrapperOpenClass)
+        .attr(a.aHi, a.f);
+
+      //Set focus on element to focus inside dialog
+      elements.elementToFocus.focus();
+
+      /*
+       * When a dialog is open, it is necessary to manage focus inside the dialog.
+       * If the dialog is modal, it is necessary to trap focus inside of it.
+       * In order to achieve this, we need to set focus back to first element,
+       * when last element is focussed and the user tabs to next element and
+       * set focus to the last element, when first element is focussed nd user tabs back (shift + tab) 
+       */
+
+      firstFocussableElement.on('keydown.' + pluginName, function (event) {
+        if (event.keyCode === 9 && checkForModifierKeys(event) === 'shift') {
+          event.preventDefault();
+          lastFocussableElement.focus();
         }
       });
-    }
-    //close dialog if user clicks on bg
-    if (settings.closeOnBgClick) {
-      dialog.on('click.ariaDialog', function (event) {
-        methods.close(dialog);
+
+      lastFocussableElement.first().on('keydown.' + pluginName, function (event) {
+        if (event.keyCode === 9 && checkForModifierKeys(event) === 'none') {
+          event.preventDefault();
+          firstFocussableElement.focus();
+        }
       });
-      wrapper.on('click.ariaDialog', function (event) {
-        event.stopPropagation();
-      });
-    }
-  };
 
 
 
-  //CLOSE DIALOG
-  //-----------------------------------------------
-  methods.close = function (dialog) {
-    var dialog = dialog.data('dialogArray')[1].dialog,
-      wrapper = dialog.data('dialogArray')[1].wrapper,
-      settings = dialog.data('dialogArray')[2];
+      //close dialog when escape is pressed
+      if (settings.closeWithEsc) {
+        win.on('keydown.' + pluginName, function (event) {
+          if (event.keyCode === 27 && checkForModifierKeys(event) === 'none') {
+            if (!settings.deepLinking) {
+              self.hide();
+            } else {
+              self.updateHash();
+            }
+          }
+        });
+      }
 
-    //enable body scroll
-    if (settings.preventScroll) {
-      body.removeClass('aria-dialog_no-scroll');
-    }
+      //close dialog if user clicks on bg
+      if (settings.closeOnBgClick) {
+        element.on('click.' + pluginName, function () {
+          if (!settings.deepLinking) {
+            self.hide();
+          } else {
+            self.updateHash();
+          }
+        });
+        wrapper.on('click.' + pluginName, function (event) {
+          event.stopPropagation();
+        });
+      }
+      //close dialog when escape is pressed
+      if (settings.closeWithEsc) {
+        win.on('keydown.' + pluginName, function (event) {
+          if (event.keyCode === 27 && checkForModifierKeys(event) === 'none') {
+            self.updateHash('hide');
+          }
+        });
+      }
+      //close dialog if user clicks on bg
+      if (settings.closeOnBgClick) {
+        element.on('click.' + pluginName, function () {
+          self.updateHash('hide');
+        });
+        wrapper.on('click.' + pluginName, function (event) {
+          event.stopPropagation();
+        });
+      }
 
-    //add open classes to dialog and wrapper
-    //and set aria-hidden to false to expose dialog to AI
-    dialog.removeClass(settings.dialogOpenClass);
-    wrapper.removeClass(settings.dialogWrapperOpenClass).attr(a.aHi, a.t).focus();
-
-    //move focus back to element that had focus before dialog was opened
-    if (focusEl !== '') {
-      focusEl.focus();
-    }
-
-    //if the plugin is configured to use css transitions,
-    //then do not perform any js animation.
-    if (!settings.cssTransitions) {
-      //fade out dialog    
-      wrapper.fadeOut(settings.fadeSpeed, function () {
-        dialog.hide();
-      });
-    }
-  };
-
-
-
-  //REMOVE DIALOG
-  //-----------------------------------------------
-  methods.remove = function (dialog) {
-    //remove elements from DOM
-    dialog.remove();
-  };
-
-
-
-  //DESTROY DIALOG - remove attributes and remove objects from array
-  //This method does not remove the ID set on dialog element
-  //-----------------------------------------------
-  methods.destroy = function (dialog) {
-    var wrapper = dialog.data('dialogArray')[1].wrapper;
-
-    //remove data from jquery object
-    dialog.removeData('dialogArray');
-
-    //remove all attributes from dialog wrapper
-    wrapper.removeAttr(a.r).removeAttr(a.aLi).removeAttr(a.tbI).removeAttr(a.aHi);
-  };
+      //Update dialog state
+      self.elementState = true;
+    },
+    hide: function () {
+      var self = this,
+        element = self.element,
+        wrapper = self.elements.wrapper,
+        settings = self.settings;
 
 
+      //Remove open classes and update attributes
+      element
+        .removeClass(settings.dialogOpenClass);
 
-  //PLUGIN
-  //-----------------------------------------------
-  $.fn.ariaDialog = function (userSettings) {
-    if (typeof userSettings === 'object' || typeof userSettings === 'undefined') {
-      this.each(function () {
-        methods.init(userSettings, $(this));
-      });
-      return;
-    } else {
-      switch (userSettings) {
-        case 'open':
-          methods.open($(this[0]));
-          break;
-        case 'close':
-          methods.close($(this[0]));
-          break;
-        case 'remove':
-          this.each(function () {
-            methods.remove($(this));
+      wrapper
+        .removeClass(settings.wrapperOpenClass)
+        .attr(a.aHi, a.t);
+
+
+      /*
+       * Perform animation if plugin is not configured to use css transitions
+       * Fade out wrapper first, then hide element (dialog)
+       */
+      if (!settings.cssTransitions) {
+        wrapper
+          .stop()
+          .fadeOut(settings.fadeSpeed, function () {
+            element.hide();
           });
-          break;
-        case 'destroy':
-          this.each(function () {
-            methods.destroy($(this));
-          });
-          break;
+      }
+
+      //move focus back to element that had focus before dialog was opened
+      if (self.elementWithFocus.length === 1) {
+        self.elementWithFocus.focus();
+      }
+
+      //unregister event handlers
+      win.off('keydown.' + pluginName);
+      element.off('click.' + pluginName);
+      wrapper.off('click.' + pluginName);
+
+
+      //Update dialog state
+      self.elementState = false;
+    },
+    updateHash: function (action) {
+      if (action === 'show') {
+        document.location.hash = this.elementId;
+      } else {
+        document.location.hash = '';
+      }
+    },
+    deepLinkingController: function () {
+      var self = this;
+      if (document.location.hash === '#' + self.elementId) {
+        self.show();
+      } else if (self.elementState) {
+        self.hide()
+      }
+    },
+    methodCaller: function (userSettings) {
+      var self = this;
+      /*
+       * This function is the control center for any method call implemented in the plugin.
+       * Because each method accepts different arguments types, the function checks the type of
+       * the passed arguments and performs the needed to make a function call
+       */
+
+      if (!self.settings.deepLinking) {
+        //Call the methods directly only if deep linking is disabled
+        switch (userSettings) {
+          case 'show':
+            self.show();
+            break;
+          case 'hide':
+            if (self.elementState) {
+              self.hide();
+            }
+            break;
+        }
+      } else {
+        //Update the hash for deep linking
+        self.updateHash(userSettings);
       }
     }
+  });
+
+
+  //A really lightweight plugin wrapper around the constructor,
+  //preventing against multiple instantiations
+  $.fn[pluginName] = function (userSettings) {
+    return this.each(function () {
+      /*
+       * If following conditions matches, then the plugin must be initialsied:
+       * Check if the plugin is instantiated for the first time
+       * Check if the argument passed is an object or undefined (no arguments)
+       */
+      if (!$.data(this, 'plugin_' + pluginName) && (typeof userSettings === 'object' || typeof userSettings === 'undefined')) {
+        $.data(this, 'plugin_' + pluginName, new AriaDialog(this, userSettings));
+      } else if (typeof userSettings === 'string') {
+        $.data(this, 'plugin_' + pluginName).methodCaller(userSettings);
+      }
+    });
   };
 
-  $.fn.ariaDialog.defaultSettings = {
+
+  //Define default settings
+  $.fn[pluginName].defaultSettings = {
+    dialogIdPrefix: 'dialog--',
     dialogClass: 'dialog',
-    dialogWrapperClass: 'dialog__wrapper',
-    dialogContainerClass: 'dialog__container',
-    dialogHeadingClass: 'dialog__heading',
+    wrapperClass: 'dialog__wrapper',
+    containerClass: 'dialog__container',
+    headingClass: 'dialog__heading',
+    mainMessageClass: 'dialog__main-message',
     dialogOpenClass: 'dialog_open',
-    dialogWrapperOpenClass: 'dialog__wrapper_open',
-    dialogType: 'modal', // modal, alert (alertdialog)
-    dialogContainerRole: 'document',
-    closeWithEsc: false,
-    closeOnBgClick: false,
-    fadeSpeed: 100,
+    wrapperOpenClass: 'dialog__wrapper_open',
+    dialogType: 'modal', // modal, alert (alertdialog) -  (non-modal in future versions)
+    containerRole: 'document',
+    closeWithEsc: true,
+    closeOnBgClick: true,
+    fadeSpeed: 600,
     cssTransitions: false,
-    preventScroll: true
-  }
-}(jQuery, window));
+    deepLinking: false,
+    setFocusOn: 'button:first-child'
+  };
+
+}(jQuery, window, document));

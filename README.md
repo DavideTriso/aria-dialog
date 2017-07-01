@@ -5,11 +5,12 @@
 jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 
 * Support for **modal dialogs** and **alert dialogs**.
-* Easy to customize tanks to a small but usefull set of options.
+* Easy to customize.
 * SASS/SCSS files for simple and quick UI customisations.
-* Only 3KB (minified).
-* Fully compatible with [**t** css-framework](https://github.com/DavideTriso/t-css-framework)
+* Only 4KB (minified).
+* Compatible with [**t** css-framework](https://github.com/DavideTriso/t-css-framework)
 * Runs in strict mode.
+* Deep linking / URL hash navigation
 
 ## Dependencies
 
@@ -20,29 +21,27 @@ Developed and tested with jQuery 3.2.1
 ## Cross-browser tests
 
 * Tested on **Google Chrome 57** / macOS Sierra 10.
-* Tested on **Mozilla Firefox 50** / macOS Sierra 10.
-* Tested on **Safari 10** / macOS Sierra 10.
-* Tested on **Safari for iOS 10.3.x** / iPhone 5s
 
 
 ## Settings / Options
 
 Name | Default | Type | Description | Required or optional
 -----|---------|------|-------------|----------
+dialogIdPrefix | dialog-- | string | Prefix used to generate the id of a dialog, if not set in markup | optional
 dialogClass | dialog | string | Class of a dialog element. | optional
-dialogWrapperClass | dialog__wrapper | string | Class of a dialog wrapper. | optional
-dialogContainerClass | dialog__container | string | Class of a dialog container. | optional
-dialogHeadingClass | dialog__heading | string | Class of a dialog heading. | optional
-dialogOpenClass | dialog_open | string | Class added to an open dialog | optional
-dialogWrapperOpenClass | dialog__wrapper_open | string | Class added to a dialog wrapper, when the dialog is open | optional
+wrapperClass | dialog__wrapper | string | Class of a dialog wrapper. | optional
+containerClass | dialog__container | string | Class of a dialog container. | optional
+headingClass | dialog__heading | string | Class of a dialog heading. | optional
+openClass | dialog_open | string | Class added to an open dialog | optional
+wrapperOpenClass | dialog__wrapper_open | string | Class added to a dialog wrapper, when the dialog is open | optional
 dialogType | modal |  token | Set type of dialog: modal or alert. For more informations see [https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog](https://www.w3.org/TR/wai-aria-practices-1.1/#alertdialog) and [https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal](https://www.w3.org/TR/wai-aria-practices-1.1/#dialog_modal). (Support for non-modal dialog is planned for future verions of the plugin). | optional
-closeWithEsc | false | bool | Close dialog when esc key is pressed. | optional (recommended value: true)
-closeOnBgClick | false | bool | Close dialog if user clicks on dialog background | optional
-dialogContainerRole | document | token | Role of dialog content. Accepted values: document, application. For more information see [https://www.w3.org/TR/wai-aria-1.1/](https://www.w3.org/TR/wai-aria-1.1/). | optional
+closeWithEsc | true | bool | Close dialog when esc key is pressed. | optional (recommended value: true)
+closeOnBgClick | true | bool | Close dialog if user clicks on dialog's background | optional
 fadeSpeed | 100 | int (>= 0) | Duration of fade-in and fade-out animations. | optional
 cssTransitions | false | bool | Use css transitions to show/hide dialog instead of jQuery fade animation. Read section 'Using CSS transitions' for more infos | optional
-preventScroll | true | bool | When a dialog is open, prevent body from scrolling in the background. | optional
-*deepLinking | false | bool | Enable deep linking feature. **IMPORTANT:** This feature is planned for future versions of the plugin | optional
+setFocusOn | 'button:first-child' | string  (selector) | The element of the dialog to set focus on, when the dialog is open | **Required**
+deepLinking | false | bool | Enable deep linking / URL hash navigation | optional
+
 
 ## Usage
 
@@ -134,7 +133,7 @@ By default the plugin is configured to use JS to show/hide dialogs. Setting the 
 A compatible **extension to dynamically generate and inject dialogs in the DOM** is provided at [https://github.com/DavideTriso/aria-dialog-generator](https://github.com/DavideTriso/aria-dialog-generator).
 
 
-## Future plans
+## Planned features
 
 * Support for non-modal dialogs.
 * Better SCSS: Mixins to quickly build awesome dialogs will be provided.
