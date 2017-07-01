@@ -51,7 +51,7 @@ deepLinking | false | bool | Enable deep linking / URL hash navigation | optiona
 
 ### HTML
 
-Use following HTML markup to generate a dialog:
+Use following HTML markup to create a dialog:
 
 ```html
 <div class="dialog" id="dialog-1">
@@ -73,7 +73,7 @@ Use following HTML markup to generate a dialog:
 </div>
 ```
 
-**IMPORTANT**: if no ID is set on the **.dialog** element, the plugin automatically generates and sets an ID when a dialog is initialised. Nevertheless, setting an ID to each dialog directly in HTML is **recommended**, in order to simplify jQuery selectors when calling methods on a dialog.
+**IMPORTANT**: if no ID is set on the **dialog** element, the plugin automatically generates and sets an ID when the widget is initialised. Nevertheless, setting an ID to each dialog directly in HTML is **recommended** when using the widget in deep linking mode, because the ID of the dialog appeare in the URL. A meaningful ID will improve usability and SEO.
 
 ### JS: Initialise
 
@@ -88,45 +88,27 @@ $('.dialog').ariaDialog({
 
 ## Methods
 
-The plugin supports following methods: open, close, destroy and remove.
+The plugin supports following methods: show, hide.
 
 ### Open:
 
-To open a dialog call ariaDialog and pass **'open'** as parameter:
+To open a dialog call ariaDialog and pass **'show'** as parameter:
 
 ```javascript
-$('#my-dialog').ariaDialog('open');
+$('#my-dialog').ariaDialog('show');
 ```
 
-### Close:
+### Hide:
 
-To close a dialog call ariaDialog and pass **'close'** as parameter:
+To close a dialog call ariaDialog and pass **'hide'** as parameter:
 
 ```javascript
-$('#my-dialog').ariaDialog('close');
+$('#my-dialog').ariaDialog('hide');
 ```
-
-### Destroy and remove:
-
-If you want, you can destroy a dialog by passing **'destroy'** as a parameter to the function:
-
-```javascript
-$('#my-dialog').ariaDialog('destroy');
-```
-
-Calling 'destroy' will remove all attributes and settings from a dialog, but the dialog will remain in the DOM.
-If you want to completly remove the dialog from the DOM, use instead  the **'remove'** method:
-
-```javascript
-$('#my-dialog').ariaDialog('remove');
-```
-
-**NOTE:** It is possible to initalise, destroy and remove multiple dialogs with a single function call. The **open** and **close** methods instead can be called only on a single element at a time.
-
 
 ## Using CSS transitions
 
-By default the plugin is configured to use JS to show/hide dialogs. Setting the option **cssTransitions** to 'true' will disable the JS animations and it is possible to implement show/hide animations directly in the css. In fact, the plugin toggles the classes passed along with the options **dialogOpenClass** and **dialogWrapperOpenClass** when the dialog is toggled.
+By default the plugin is configured to use JS to show/hide dialogs. Setting the option **cssTransitions** to 'true' will disable the JS animations and it is possible to implement show/hide animations directly in the css. In fact, the plugin toggles the classes passed along with the options **dialogOpenClass** and **wrapperOpenClass** when the dialog is toggled.
 
 ## Inject dialogs dinamically
 
@@ -137,8 +119,6 @@ A compatible **extension to dynamically generate and inject dialogs in the DOM**
 
 * Support for non-modal dialogs.
 * Better SCSS: Mixins to quickly build awesome dialogs will be provided.
-* Better integration with **t** css framework.
-* Hash navigation and deep linking.
 
 ## LICENSE
 
