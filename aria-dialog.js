@@ -320,6 +320,10 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       //Update dialog state
       self.elementState = true;
+
+
+      //trigger custom event on window for authors to listen for
+      win.on(pluginName + '.show', self.element);
     },
     hide: function () {
       var self = this,
@@ -362,6 +366,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       //Update dialog state
       self.elementState = false;
+
+      //trigger custom event on window for authors to listen for
+      win.on(pluginName + '.hide', self.element);
     },
     updateHash: function (action) {
       if (action === 'show') {
@@ -378,7 +385,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         self.hide()
       }
     },
-    methodCaller: function (userSettings) {
+    methodCaller: function (methodName) {
       var self = this;
       /*
        * This function is the control center for any method call implemented in the plugin.
@@ -388,7 +395,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       if (!self.settings.deepLinking) {
         //Call the methods directly only if deep linking is disabled
-        switch (userSettings) {
+        switch (methodName) {
           case 'show':
             self.show();
             break;
@@ -400,7 +407,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         }
       } else {
         //Update the hash for deep linking
-        self.updateHash(userSettings);
+        self.updateHash(methodName);
       }
     }
   });

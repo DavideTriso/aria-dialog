@@ -20,7 +20,8 @@ Developed and tested with jQuery 3.2.1
 
 ## Cross-browser tests
 
-* Tested on **Google Chrome 57** / macOS Sierra 10.
+* **Google Chrome 57** / macOS Sierra 10
+* iPhone 5s **Safari for iOS** 10.3.2
 
 
 ## Settings / Options
@@ -104,6 +105,22 @@ To close a dialog call ariaDialog and pass **'hide'** as parameter:
 
 ```javascript
 $('#my-dialog').ariaDialog('hide');
+```
+
+## Custom event listeners
+
+This plugin triggers following events:
+
+* **ariaDialog.show** when a dialog is shown
+* **ariaDialog.hide** when a dialog is closed
+
+The custom events are triggered on window and return the dialog element as argument.
+
+```javascript
+//add event listener  
+$(window).on('ariaDialog.show', function(event, dialog){
+  console.log('The dialog' + dialog + 'was shown');
+});
 ```
 
 ## Using CSS transitions
