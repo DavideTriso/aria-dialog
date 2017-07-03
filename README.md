@@ -10,7 +10,7 @@ jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 * Only 4KB (minified).
 * Compatible with [**t** css-framework](https://github.com/DavideTriso/t-css-framework)
 * Runs in strict mode.
-* Deep linking / URL hash navigation
+* Deep linking / URL hash navigation for asyncronous applications.
 
 ## Dependencies
 
