@@ -211,6 +211,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         });
       }
 
+      //trigger custom event on window for authors to listen for
+      win.trigger(pluginName + '.initialised', [self.element]);
 
       //increment count after every initalisation
       count = count + 1;
@@ -434,7 +436,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   //Define default settings
   $.fn[pluginName].defaultSettings = {
     dialogIdPrefix: 'dialog--',
-    dialogClass: 'dialog',
     wrapperClass: 'dialog__wrapper',
     containerClass: 'dialog__container',
     headingClass: 'dialog__heading',
@@ -470,9 +471,9 @@ $(document).ready(function () {
   $('#open-2').on('click', function () {
     $('.dialog').first().ariaDialog('hide');
   });
-  
-  $(window).on('ariaDialog.show', function(event, element){
+
+  $(window).on('ariaDialog.show', function (event, element) {
     console.log(element);
   });
-  
+
 });

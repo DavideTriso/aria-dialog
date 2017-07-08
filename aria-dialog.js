@@ -211,6 +211,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         });
       }
 
+      //trigger custom event on window for authors to listen for
+      win.trigger(pluginName + '.initialised', [self.element]);
 
       //increment count after every initalisation
       count = count + 1;
