@@ -4,12 +4,9 @@
 
 jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 
+* User friendly and accessible
 * Support for **modal dialogs** and **alert dialogs**.
-* Easy to customize.
-* SASS/SCSS files for quick UI customisations.
 * Only 4KB (minified).
-* Compatible with [**t** css-framework](https://github.com/DavideTriso/t-css-framework)
-* Runs in strict mode.
 * Deep linking / URL hash navigation for asyncronous applications.
 
 ## Dependencies
@@ -136,7 +133,7 @@ A compatible **extension to dynamically generate and inject dialogs in the DOM**
 ## Planned features
 
 * Support for non-modal dialogs.
-* Better SCSS: Mixins to quickly build awesome dialogs will be provided.
+* Optimised SCSS to quickly build awesome dialogs.
 
 ## LICENSE
 

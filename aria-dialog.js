@@ -436,7 +436,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   //Define default settings
   $.fn[pluginName].defaultSettings = {
     dialogIdPrefix: 'dialog--',
-    dialogClass: 'dialog',
     wrapperClass: 'dialog__wrapper',
     containerClass: 'dialog__container',
     headingClass: 'dialog__heading',

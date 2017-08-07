@@ -468,10 +468,20 @@ $(document).ready(function () {
   $('#open-1').on('click', function () {
     $('.dialog').first().ariaDialog('show');
   });
-  $('#open-2').on('click', function () {
+  
+  $('#dismiss-btn-1, #btn-yes-1').on('click', function () {
     $('.dialog').first().ariaDialog('hide');
   });
-
+  
+  $('#open-2').on('click', function () {
+    $('.dialog').last().ariaDialog('show');
+  });
+  
+  $('#dismiss-btn-2, #btn-yes-2').on('click', function () {
+    $('.dialog').last().ariaDialog('hide');
+  });
+  
+  
   $(window).on('ariaDialog.show', function (event, element) {
     console.log(element);
   });
