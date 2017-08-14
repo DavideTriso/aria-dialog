@@ -212,7 +212,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       }
 
       //trigger custom event on window for authors to listen for
-      win.trigger(pluginName + '.initialised', [self.element]);
+      win.trigger(pluginName + '.initialised', [self]);
 
       //increment count after every initalisation
       count = count + 1;
@@ -325,7 +325,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
       //trigger custom event on window for authors to listen for
-      win.trigger(pluginName + '.show', self.element);
+      win.trigger(pluginName + '.show', [self]);
     },
     hide: function () {
       var self = this,
@@ -370,7 +370,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       self.elementState = false;
 
       //trigger custom event on window for authors to listen for
-      win.trigger(pluginName + '.hide', self.element);
+      win.trigger(pluginName + '.hide', [self]);
     },
     updateHash: function (action) {
       if (action === 'show') {

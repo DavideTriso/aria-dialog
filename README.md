@@ -111,13 +111,13 @@ This plugin triggers following events:
 * **ariaDialog.show** when a dialog is shown
 * **ariaDialog.hide** when a dialog is closed
 
-The custom events are triggered on window and return the dialog element as argument.
+The custom events are triggered on window and return the dialog data object as argument.
 
 ```javascript
 //add event listener  
 $(window).on('ariaDialog.show', function(event, dialog){
   //perform an action
-  dialog.addClass('my-custom-class')
+  dialog.element.addClass('my-custom-class')
 });
 ```
 
