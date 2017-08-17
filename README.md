@@ -133,7 +133,6 @@ A compatible **extension to dynamically generate and inject dialogs in the DOM**
 ## Planned features
 
 * Support for non-modal dialogs.
-* Optimised SCSS to quickly build awesome dialogs.
 
 ## LICENSE
 
