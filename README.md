@@ -7,7 +7,8 @@ jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
 * User friendly and accessible
 * Support for **modal dialogs** and **alert dialogs**.
 * Only 4KB (minified).
-* Deep linking / URL hash navigation for asyncronous applications.
+* Deep linking / URL hash navigation
+* Compatible with amd and require.js
 
 ## Dependencies
 
