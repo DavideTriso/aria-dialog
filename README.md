@@ -2,9 +2,9 @@
 
 ## About
 
-jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant.
+jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant. [Go to demo page](https://davidetriso.github.io/aria-dialog/).
 
-* User friendly and accessible
+* User-friendly and accessible
 * Support for **modal dialogs** and **alert dialogs**.
 * Only 4KB (minified).
 * Deep linking / URL hash navigation
