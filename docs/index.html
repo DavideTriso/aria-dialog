@@ -6,13 +6,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
   <link rel="stylesheet" href="aria-dialog.css" />
+  <style>
+    body {
+      max-width: 1000px;
+      margin: auto;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .btn {
+      display: block;
+      max-width: 300px;
+      text-align: center;
+      text-decoration: none;
+      background-color: #6216c9;
+      color: #fff;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #510cad;
+      margin: 60px auto;
+    }
+    .btn:hover,
+    .btn:focus {
+      background-color: #510cad;
+    }
+    .btn:avtive {
+      background-color: #6216c9;
+    }
+  </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="aria-dialog.js"></script>
 
 </head>
 
 <body style="height: 2000px">
-  <p>Dialog demo </p>
+  <h1>Dialog demo </h1>
   <button type="button" id="open-1">Open dialog 1</button>
   <button type="button" id="open-2">Open dialog 2</button>
 
@@ -49,6 +76,8 @@
       </div>
     </section>
   </div>
+  
+    <a href="https://github.com/DavideTriso/aria-accordion" class="btn">Check documentation</a>
 </body>
 
 </html>
