@@ -9,6 +9,7 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
+
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory);
@@ -121,34 +122,34 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        * Each implementation need slightly different semantic
        */
       switch (settings.dialogType) {
-        case 'modal':
+      case 'modal':
+        wrapper
+          .attr(a.r, 'dialog')
+          .attr(a.aMo, a.t); //a modal dialog
+        break;
+      case 'alert':
+        wrapper
+          .attr(a.r, 'alertdialog')
+          .attr(a.aMo, a.t); //an alert dialog
+        break;
+        /* Design patterns for non modal dialogs were not yet defined in WAI ARIA
+        * Support will be added in future versions of the plugin
+        case 'non-modal':
           wrapper
             .attr(a.r, 'dialog')
-            .attr(a.aMo, a.t); //a modal dialog
+            .attr(a.aMo, a.f); //a non modal dialog
           break;
-        case 'alert':
-          wrapper
-            .attr(a.r, 'alertdialog')
-            .attr(a.aMo, a.t); //an alert dialog
-          break;
-          /* Design patterns for non modal dialogs were not yet defined in WAI ARIA
-          * Support will be added in future versions of the plugin
-          case 'non-modal':
-            wrapper
-              .attr(a.r, 'dialog')
-              .attr(a.aMo, a.f); //a non modal dialog
-            break;
-            */
+          */
       }
 
 
       /*
-       * For the dialog to be accessible, it is important to expose the  
+       * For the dialog to be accessible, it is important to expose the
        * relation between dialog wrapper (element with role of dialog - or alertdialog)
        * and the heading of the dialog with aria-labelledby
        * In order to reference the id of the heading in the attribute aria-labelledby,
        * we have to check if the heading has an id, if not set it.
-       * 
+       *
        * Because the dialog is initially hidden, we set aria-hidden to true
        *
        * Because some implementations of dialogs need the wrapper to get focus when the dialog is opened,
@@ -261,7 +262,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        * If the dialog is modal, it is necessary to trap focus inside of it.
        * In order to achieve this, we need to set focus back to first element,
        * when last element is focussed and the user tabs to next element and
-       * set focus to the last element, when first element is focussed nd user tabs back (shift + tab) 
+       * set focus to the last element, when first element is focussed nd user tabs back (shift + tab)
        */
 
       firstFocussableElement.on('keydown.' + pluginName, function (event) {
@@ -402,14 +403,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       if (!self.settings.deepLinking) {
         //Call the methods directly only if deep linking is disabled
         switch (methodName) {
-          case 'show':
-            self.show();
-            break;
-          case 'hide':
-            if (self.elementState) {
-              self.hide();
-            }
-            break;
+        case 'show':
+          self.show();
+          break;
+        case 'hide':
+          if (self.elementState) {
+            self.hide();
+          }
+          break;
         }
       } else {
         //Update the hash for deep linking
@@ -457,37 +458,3 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   };
 
 }(jQuery, window, document)));
-
-
-$(document).ready(function () {
-  'use strict';
-
-  $('.dialog').ariaDialog({
-    closeWithEsc: true,
-    closeOnBgClick: true,
-    deepLinking: false
-  });
-
-
-  $('#open-1').on('click', function () {
-    $('.dialog').first().ariaDialog('show');
-  });
-
-  $('#dismiss-btn-1, #btn-yes-1').on('click', function () {
-    $('.dialog').first().ariaDialog('hide');
-  });
-
-  $('#open-2').on('click', function () {
-    $('.dialog').last().ariaDialog('show');
-  });
-
-  $('#dismiss-btn-2, #btn-yes-2').on('click', function () {
-    $('.dialog').last().ariaDialog('hide');
-  });
-
-
-  $(window).on('ariaDialog.show', function (event, element) {
-    console.log(element);
-  });
-
-});

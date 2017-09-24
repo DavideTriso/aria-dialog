@@ -35,14 +35,45 @@
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="aria-dialog.js"></script>
+<script>
 
+$(document).ready(function () {
+  'use strict';
+
+  $('.dialog').ariaDialog({
+    closeWithEsc: true,
+    closeOnBgClick: true,
+    deepLinking: false
+  });
+
+  $('#open-1').on('click', function () {
+    $('.dialog').first().ariaDialog('show');
+  });
+
+  $('#dismiss-btn-1, #btn-yes-1').on('click', function () {
+    $('.dialog').first().ariaDialog('hide');
+  });
+
+  $('#open-2').on('click', function () {
+    $('.dialog').last().ariaDialog('show');
+  });
+
+  $('#dismiss-btn-2, #btn-yes-2').on('click', function () {
+    $('.dialog').last().ariaDialog('hide');
+  });
+
+  $(window).on('ariaDialog.show', function (event, element) {
+    console.log(element);
+  });
+
+});
+</script>
 </head>
 
 <body style="height: 2000px">
   <h1>Aria dialog</h1>
   <button type="button" id="open-1">Open dialog 1</button>
   <button type="button" id="open-2">Open dialog 2</button>
-
   <div class="dialog" id="dialog-1">
     <section class="dialog__wrapper">
       <div class="dialog__container">
@@ -60,7 +91,7 @@
     </section>
   </div>
   <div class="dialog" id="dialog-2">
-    <section class="dialog__wrapper"> 
+    <section class="dialog__wrapper">
       <div class="dialog__container dialog__container_alert">
         <header class="dialog__header">
           <h2 class="dialog__heading">Alert dialog</h2>
@@ -76,7 +107,7 @@
       </div>
     </section>
   </div>
-  
+
     <a href="https://github.com/DavideTriso/aria-dialog" class="btn">Check documentation</a>
 </body>
 
