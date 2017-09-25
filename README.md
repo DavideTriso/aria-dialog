@@ -52,23 +52,47 @@ deepLinking | false | bool | Enable deep linking / URL hash navigation
 Use following HTML markup to implement a dialog:
 
 ```html
+<!-- Dialog with visible heading -->
 <div class="dialog" id="dialog-1">
   <section class="dialog__wrapper">
-    <section class="dialog__container">
+    <div class="dialog__container">
       <header class="dialog__header">
-        <h2 class="dialog__heading">Dialog heading</h2>
-        <button class="dialog__dismiss-btn" id="dismiss-btn-2">X (Close)</button>
+        <h2 class="dialog__heading">Modal dialog</h2>
+        <button class="dialog__dismiss-btn" id="dismiss-btn-2">X</button>
       </header>
       <div class="dialog__body">
-        <p>This is a really useful dialog. Close dialog?</p>
+        <p>This is a useful modal dialog. Close dialog?</p>
         <div class="dialog__options">
-          <button class="dialog__option-btn" type="button" id="btn-yes-1">Yes</button>
-          <button class="dialog__option-btn" type="button" id="btn-no-1">No</button>
+          <button class="dialog__option-btn" type="button" id="btn-yes-2">Yes</button>
+          <button class="dialog__option-btn" type="button" id="btn-no-2">No</button>
         </div>
       </div>
     </div>
   </section>
 </div>
+
+<!-- OR -->
+
+<!-- Dialog without visible heading (uses aria-label instead) -->
+<div class="dialog" id="dialog-2">
+  <section class="dialog__wrapper" aria-label="Dialog heading">
+    <div class="dialog__container">
+      <header class="dialog__header">
+        <h2 class="dialog__heading">Modal dialog</h2>
+        <button class="dialog__dismiss-btn" id="dismiss-btn-2">X</button>
+      </header>
+      <div class="dialog__body">
+        <p>This is a useful modal dialog. Close dialog?</p>
+        <div class="dialog__options">
+          <button class="dialog__option-btn" type="button" id="btn-yes-2">Yes</button>
+          <button class="dialog__option-btn" type="button" id="btn-no-2">No</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+
 ```
 
 **IMPORTANT**: if no ID is set on the **dialog** element, the plugin automatically generates and sets an ID when the widget is initialised. Nevertheless, setting an ID to each dialog directly in HTML is **recommended** when using the widget in deep linking mode, because the ID of the dialog will be used as identifier in the URL. A meaningful ID will improve usability and SEO.
