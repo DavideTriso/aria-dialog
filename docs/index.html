@@ -13,6 +13,7 @@
       font-family: sans-serif;
       text-align: center;
     }
+
     .btn {
       display: block;
       max-width: 300px;
@@ -25,49 +26,50 @@
       border: 1px solid #510cad;
       margin: 60px auto;
     }
+
     .btn:hover,
     .btn:focus {
       background-color: #510cad;
     }
+
     .btn:avtive {
       background-color: #6216c9;
     }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="aria-dialog.js"></script>
-<script>
+  <script>
+    $(document).ready(function() {
+      'use strict';
 
-$(document).ready(function () {
-  'use strict';
+      $('.dialog').ariaDialog({
+        closeWithEsc: true,
+        closeOnBgClick: true,
+        deepLinking: false
+      });
 
-  $('.dialog').ariaDialog({
-    closeWithEsc: true,
-    closeOnBgClick: true,
-    deepLinking: false
-  });
+      $('#open-1').on('click', function() {
+        $('.dialog').first().ariaDialog('show');
+      });
 
-  $('#open-1').on('click', function () {
-    $('.dialog').first().ariaDialog('show');
-  });
+      $('#dismiss-btn-1, #btn-yes-1').on('click', function() {
+        $('.dialog').first().ariaDialog('hide');
+      });
 
-  $('#dismiss-btn-1, #btn-yes-1').on('click', function () {
-    $('.dialog').first().ariaDialog('hide');
-  });
+      $('#open-2').on('click', function() {
+        $('.dialog').last().ariaDialog('show');
+      });
 
-  $('#open-2').on('click', function () {
-    $('.dialog').last().ariaDialog('show');
-  });
+      $('#dismiss-btn-2, #btn-yes-2').on('click', function() {
+        $('.dialog').last().ariaDialog('hide');
+      });
 
-  $('#dismiss-btn-2, #btn-yes-2').on('click', function () {
-    $('.dialog').last().ariaDialog('hide');
-  });
+      $(window).on('ariaDialog.show', function(event, element) {
+        console.log(element);
+      });
 
-  $(window).on('ariaDialog.show', function (event, element) {
-    console.log(element);
-  });
-
-});
-</script>
+    });
+  </script>
 </head>
 
 <body style="height: 2000px">
@@ -104,7 +106,7 @@ $(document).ready(function () {
     </section>
   </div>
 
-    <a href="https://github.com/DavideTriso/aria-dialog" class="btn">Check documentation</a>
+  <a href="https://github.com/DavideTriso/aria-dialog" class="btn">Check documentation</a>
 </body>
 
 </html>

@@ -1,0 +1,43 @@
+//----------------
+//ELEMENTS
+//----------------
+
+.dialog__wrapper {
+  background: #fff;
+  @extend %max-height-100vh;
+  @extend %max-width-100;
+
+  @include mqMin ('w2') {
+    transform: translateY(-3vh);
+  }
+}
+
+.dialog__container {
+  @extend %r-p_4;
+}
+
+.dialog__header {
+  //
+}
+
+.dialog__heading {
+  //
+}
+
+.dialog__dismiss-btn {
+  right: 1rem;
+  @extend %position-absolute;
+  top: 1rem;
+}
+
+.dialog__body {
+  //
+}
+
+.dialog__options {
+  //
+}
+
+.dialog__option-btn {
+  //
+}

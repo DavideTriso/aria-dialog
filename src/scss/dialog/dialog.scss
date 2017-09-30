@@ -1,0 +1,15 @@
+//----------------
+//BLOCK
+//----------------
+
+.dialog {
+  background-color: rgba(19,19,19,0.9);
+  @extend %align-items-center;
+  @extend %display-flex;
+  @extend %height-100;
+  @extend %justify-content-center;
+  @extend %left-0;
+  @extend %position-fixed;
+  @extend %top-0;
+  @extend %width-100;
+}

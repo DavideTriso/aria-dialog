@@ -2,7 +2,7 @@
 
 ## About
 
-jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant. [Go to demo page](https://davidetriso.github.io/aria-dialog/).
+jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant. [Go to demo page](https://davidetriso.github.io/aria-dialog/) or [check on npm](https://www.npmjs.com/package/t-aria-dialog).
 
 * User-friendly and accessible
 * Support for **modal dialogs** and **alert dialogs**.
@@ -20,7 +20,7 @@ Developed and tested with jQuery 3.2.1
 
 * **Google Chrome 57** / macOS Sierra 10
 * iPhone 5s **Safari for iOS** 10.3.2
-
+* **Google Chrome 60**, **Edge**, **Firefox**  / Windows 10
 
 ## Settings / Options
 
@@ -40,10 +40,18 @@ cssTransitions | false | bool | Use css transitions to show/hide dialog instead 
 setFocusOn | 'button:first-child' | string (selector) | The jQuery selector of the element to set focus on, when the dialog is open. **Required**
 deepLinking | false | bool | Enable deep linking / URL hash navigation
 
+## Installation
+
+Download the package from **GitHub** and get the compiled files from the `dist` folder.
+
+The plugin is also available on **npm**:
+```
+npm install t-aria-dialog
+```
 
 ## Usage
 
-1. Include the JS script **aria-dialog.js** - or the minified production script **aria-dialog.min.js**-  in the head or the body of your HTML file.
+1. Include the JS script **aria-dialog.js** - or the minified production script **aria-dialog.min.js** -  in the head or the body of your HTML file.
 2. Include the CSS file  **aria-dialog.css** in the head of your HTML file or include the SCSS files in your project.
 3. Initialise the widget within an inline script tag, or in an external JS file.
 
@@ -91,7 +99,6 @@ Use following HTML markup to implement a dialog:
     </div>
   </section>
 </div>
-
 
 ```
 

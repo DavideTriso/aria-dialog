@@ -1,39 +1,100 @@
 .dialog {
-  background: rgba(34, 34, 34, 0.9);
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  font-family: sans-serif;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+.dialog {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.dialog {
   height: 100%;
+}
+
+.dialog {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.dialog {
   left: 0;
+}
+
+.dialog__wrapper {
+  max-height: 100vh;
+}
+
+.dialog__wrapper {
+  max-width: 100%;
+}
+
+.dialog__dismiss-btn {
+  position: absolute;
+}
+
+.dialog {
   position: fixed;
+}
+
+.dialog {
   top: 0;
+}
+
+.dialog {
   width: 100%;
+}
+
+/*
+.demo {
+    background-color: red;
+    @include mqMin(w4) {
+	    background-color: blue;
+	}
+}
+*/
+/*
+.demo {
+    background-color: red;
+    @include mqMax(w4) {
+	    background-color: blue;
+	}
+}
+*/
+/*
+.demo {
+    background-color: red;
+    @include mqRange(w2, w4) {
+	    background-color: blue;
+	}
+}
+*/
+.dialog__container {
+  padding: 0.8rem;
+}
+
+/*
+@include generateResponsiveGutter($guttersBreakpointsMap, $smallGuttersList, $containerClassName, $rowClassName, $columnClassName, $smallGutterModifierName);
+@include generateResponsiveGutter($guttersBreakpointsMap, $largeGuttersList, $containerClassName, $rowClassName, $columnClassName, $largeGutterModifierName);*/
+.dialog {
+  background-color: rgba(19, 19, 19, 0.9);
 }
 
 .dialog__wrapper {
   background: #fff;
-  border: 0.01rem solid #c7c7c7;
-  max-width: 20rem;
-  position: relative;
 }
-
-.dialog__container {
-  padding: 1rem;
-}
-
-.dialog__heading {
-  margin: 0;
+@media screen and (min-width: 768px) {
+  .dialog__wrapper {
+    -webkit-transform: translateY(-3vh);
+        -ms-transform: translateY(-3vh);
+            transform: translateY(-3vh);
+  }
 }
 
 .dialog__dismiss-btn {
   right: 1rem;
   top: 1rem;
-  position: absolute;
 }
