@@ -12,7 +12,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 (function (factory) {
   if (typeof define === 'function' && define.amd) {
-    define(['jquery'], factory);
+    define(['jquery'], factory); //AMD
+  } else if (typeof exports === 'object') {
+    module.exports = factory(require('jquery')); //CommonJS
+  } else {
+    factory(jQuery, window, document);
   }
 }(function ($, window, document) {
   'use strict';
@@ -457,4 +461,4 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     setFocusOn: 'button:first-child'
   };
 
-}(jQuery, window, document)));
+}));
