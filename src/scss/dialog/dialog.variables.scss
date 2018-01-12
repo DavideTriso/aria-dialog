@@ -1,0 +1,51 @@
+//BLOCK
+$dialog--background: (
+  backgroundColor: rgba(30, 30, 30, 0.4)
+)
+!default;
+$dialog--flexPositioning: (
+  alignItems    : center,
+  justifyContent: center
+)
+!default;
+$dialog--sizes: (
+  width : 100%,
+  height: 100%
+)
+!default;
+
+//ELEMENTS
+//window
+$dialog__window--background: (
+  backgroundColor: #fff
+)
+!default;
+$dialog__window--border: (
+  borderRadius: 0.2rem,
+  borderStyle : solid,
+  borderWidth : 0.05rem,
+  borderColor : #cbcbcb
+);
+$dialog__window--sizes: (
+  maxHeight: 100vh,
+  maxWidth : 100%
+)
+!default;
+$dialog__window--box-shadow: 0 0 0.2rem 0 rgba(0,0,0,0.2) !default;
+
+//container
+$dialog__container--padding: (
+  all: 0.8rem
+)
+!default;
+
+//dismiss btn
+$dialog__dismiss-btn--sizes: (
+  maxWidth : 1.2rem,
+  maxHeight: 1.2rem,
+)
+!default;
+$dialog__dismiss-btn--top: 1rem !default;
+$dialog__dismiss-btn--right: 1rem !default;
+
+//MODIFIERS

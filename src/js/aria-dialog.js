@@ -88,7 +88,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     self.elementId = setId(self.element, self.settings.dialogIdPrefix, count); // The id of the dialog
     self.elementState = false; //the state of the dialog (visible -> true, hidden -> false)
     self.elements = {
-      wrapper: self.element.find('.' + self.settings.wrapperClass),
+      dialogWindow: self.element.find('.' + self.settings.windowClass),
       container: self.element.find('.' + self.settings.containerClass),
       heading: self.element.find('.' + self.settings.headingClass),
       mainMessage: self.element.find('.' + self.settings.mainMessageClass).first()
@@ -107,7 +107,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         settings = self.settings,
         element = self.element,
         elements = self.elements,
-        wrapper = elements.wrapper;
+        dialogWindow = elements.dialogWindow;
 
       /*
        * if the plugin is configured to use css transitions,
@@ -116,7 +116,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       if (!settings.cssTransitions) {
         element.hide();
-        wrapper.hide();
+        dialogWindow.hide();
       }
 
       /*
@@ -127,19 +127,19 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        */
       switch (settings.dialogType) {
       case 'modal':
-        wrapper
+        dialogWindow
           .attr(a.r, 'dialog')
           .attr(a.aMo, a.t); //a modal dialog
         break;
       case 'alert':
-        wrapper
+        dialogWindow
           .attr(a.r, 'alertdialog')
           .attr(a.aMo, a.t); //an alert dialog
         break;
         /* Design patterns for non modal dialogs were not yet defined in WAI ARIA
         * Support will be added in future versions of the plugin
         case 'non-modal':
-          wrapper
+          dialogWindow
             .attr(a.r, 'dialog')
             .attr(a.aMo, a.f); //a non modal dialog
           break;
@@ -149,17 +149,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       /*
        * For the dialog to be accessible, it is important to expose the
-       * relation between dialog wrapper (element with role of dialog - or alertdialog)
+       * relation between dialog window (element with role of dialog - or alertdialog)
        * and the heading of the dialog with aria-labelledby
        * In order to reference the id of the heading in the attribute aria-labelledby,
        * we have to check if the heading has an id, if not set it.
        *
        * Because the dialog is initially hidden, we set aria-hidden to true
        *
-       * Because some implementations of dialogs need the wrapper to get focus when the dialog is opened,
-       * we set a tabindex of -1 on the wrapper to make it focussable with scripting.
+       * Because some implementations of dialogs need the dialogWindow to get focus when the dialog is opened,
+       * we set a tabindex of -1 on the dialogWindow to make it focussable with scripting.
        */
-      wrapper
+      dialogWindow
         .attr(a.aLab, setId(elements.heading, self.elementId + '__heading'))
         .attr(a.aHi, a.t)
         .attr(a.tbI, '-1');
@@ -170,7 +170,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        * We do the same operations as for the heading, if the message is present
        */
       if (elements.mainMessage.length === 1) {
-        wrapper.attr(a.aDes, setId(elements.mainMessage, self.elementId + '__main-message'));
+        dialogWindow.attr(a.aDes, setId(elements.mainMessage, self.elementId + '__main-message'));
       }
 
       /*
@@ -179,14 +179,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        * to manage focus in the dialog and check if the element to set focus on
        * when the dialog is open is focussable.
        */
-      elements.focussableElements = getFocussableElements(wrapper);
+      elements.focussableElements = getFocussableElements(dialogWindow);
 
       /*
        * Get the element to focus inside the dialog (setFocusOn), when the dialog is open.
        * Expected value is a selector string.
        * We perform a call to the jQuery function and get the element.
        */
-      elements.elementToFocus = wrapper.find(settings.setFocusOn);
+      elements.elementToFocus = dialogWindow.find(settings.setFocusOn);
 
       /*
        * Now we perform some checks on the element to set focus on, to make sure it is:
@@ -201,25 +201,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         throw new Error('Check value of \'setFocusOn\' option.');
       }
 
-
-      /*
-       * Enable deep linking by watching for hash changes
-       * whenewer a hash change happens, we must check if the hash
-       * matches the id of the dialog.
-       * If yes, then the dialog must be opened, else closed.
-       */
-      if (settings.deepLinking) {
-        self.deepLinkingController();
-
-        win.on('hashchange', function () {
-          if (document.location.hash === '#' + self.elementId) {
-            self.show();
-          } else if (self.elementState) {
-            self.deepLinkingController();
-          }
-        });
-      }
-
       //trigger custom event on window for authors to listen for
       win.trigger(pluginName + '.initialised', [self]);
 
@@ -230,9 +211,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       var self = this,
         element = self.element,
         elements = self.elements,
-        wrapper = elements.wrapper,
+        dialogWindow = elements.dialogWindow,
         settings = self.settings,
-        focussableElements = getFocussableElements(wrapper),
+        focussableElements = getFocussableElements(dialogWindow),
         firstFocussableElement = focussableElements.first(),
         lastFocussableElement = focussableElements.last();
 
@@ -245,7 +226,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        */
       if (!settings.cssTransitions) {
         element.show();
-        wrapper
+        dialogWindow
           .stop()
           .fadeIn(settings.fadeSpeed);
       }
@@ -253,9 +234,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       //add open classes to dialog
       element.addClass(settings.dialogOpenClass);
 
-      //add open class on wrapper and  set aria-hidden to false to expose dialog to AI
-      wrapper
-        .addClass(settings.wrapperOpenClass)
+      //add open class on dialogWindow and  set aria-hidden to false to expose dialog to AI
+      dialogWindow
+        .addClass(settings.windowOpenClass)
         .attr(a.aHi, a.f);
 
       //Set focus on element to focus inside dialog
@@ -289,11 +270,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       if (settings.closeWithEsc) {
         win.on('keydown.' + pluginName, function (event) {
           if (event.keyCode === 27 && checkForModifierKeys(event) === 'none') {
-            if (!settings.deepLinking) {
-              self.hide();
-            } else {
-              self.updateHash();
-            }
+            self.hide();
           }
         });
       }
@@ -301,13 +278,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       //close dialog if user clicks on bg
       if (settings.closeOnBgClick) {
         element.on('click.' + pluginName, function () {
-          if (!settings.deepLinking) {
-            self.hide();
-          } else {
-            self.updateHash();
-          }
+          self.hide();
         });
-        wrapper.on('click.' + pluginName, function (event) {
+        dialogWindow.on('click.' + pluginName, function (event) {
           event.stopPropagation();
         });
       }
@@ -324,7 +297,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         element.on('click.' + pluginName, function () {
           self.updateHash('hide');
         });
-        wrapper.on('click.' + pluginName, function (event) {
+        dialogWindow.on('click.' + pluginName, function (event) {
           event.stopPropagation();
         });
       }
@@ -339,7 +312,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     hide: function () {
       var self = this,
         element = self.element,
-        wrapper = self.elements.wrapper,
+        dialogWindow = self.elements.dialogWindow,
         settings = self.settings;
 
 
@@ -347,17 +320,17 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       element
         .removeClass(settings.dialogOpenClass);
 
-      wrapper
-        .removeClass(settings.wrapperOpenClass)
+      dialogWindow
+        .removeClass(settings.windowOpenClass)
         .attr(a.aHi, a.t);
 
 
       /*
        * Perform animation if plugin is not configured to use css transitions
-       * Fade out wrapper first, then hide element (dialog)
+       * Fade out dialogWindow first, then hide element (dialog)
        */
       if (!settings.cssTransitions) {
-        wrapper
+        dialogWindow
           .stop()
           .fadeOut(settings.fadeSpeed, function () {
             element.hide();
@@ -372,7 +345,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       //unregister event handlers
       win.off('keydown.' + pluginName);
       element.off('click.' + pluginName);
-      wrapper.off('click.' + pluginName);
+      dialogWindow.off('click.' + pluginName);
 
 
       //Update dialog state
@@ -388,14 +361,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         document.location.hash = '';
       }
     },
-    deepLinkingController: function () {
-      var self = this;
-      if (document.location.hash === '#' + self.elementId) {
-        self.show();
-      } else if (self.elementState) {
-        self.hide()
-      }
-    },
     methodCaller: function (methodName) {
       var self = this;
       /*
@@ -403,22 +368,15 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        * Because each method accepts different arguments types, the function checks the type of
        * the passed arguments and performs the needed to make a function call
        */
-
-      if (!self.settings.deepLinking) {
-        //Call the methods directly only if deep linking is disabled
-        switch (methodName) {
-        case 'show':
-          self.show();
-          break;
-        case 'hide':
-          if (self.elementState) {
-            self.hide();
-          }
-          break;
+      switch (methodName) {
+      case 'show':
+        self.show();
+        break;
+      case 'hide':
+        if (self.elementState) {
+          self.hide();
         }
-      } else {
-        //Update the hash for deep linking
-        self.updateHash(methodName);
+        break;
       }
     }
   });
@@ -445,19 +403,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   //Define default settings
   $.fn[pluginName].defaultSettings = {
     dialogIdPrefix: 'dialog--',
-    wrapperClass: 'dialog__wrapper',
+    windowClass: 'dialog__window',
     containerClass: 'dialog__container',
     headingClass: 'dialog__heading',
     mainMessageClass: 'dialog__main-message',
     dialogOpenClass: 'dialog_open',
-    wrapperOpenClass: 'dialog__wrapper_open',
+    windowOpenClass: 'dialog__window_open',
     dialogType: 'modal', // modal, alert (alertdialog) -  (non-modal in future versions)
     containerRole: 'document',
     closeWithEsc: true,
     closeOnBgClick: true,
     fadeSpeed: 600,
     cssTransitions: false,
-    deepLinking: false,
     setFocusOn: 'button:first-child'
   };
 

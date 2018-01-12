@@ -3,13 +3,12 @@
 //----------------
 
 .dialog {
-  background-color: rgba(19,19,19,0.9);
-  @extend %align-items-center;
-  @extend %display-flex;
-  @extend %height-100;
-  @extend %justify-content-center;
-  @extend %left-0;
-  @extend %position-fixed;
-  @extend %top-0;
-  @extend %width-100;
+  @include background($dialog--background);
+  display : flex;
+  position: fixed;
+  @include flexPositioning($dialog--flexPositioning);
+  @include sizes($dialog--sizes);
+  left    : 0;
+  top     : 0;
+  z-index : zIndex('dialogModal');
 }

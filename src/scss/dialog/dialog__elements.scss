@@ -2,18 +2,18 @@
 //ELEMENTS
 //----------------
 
-.dialog__wrapper {
-  background: #fff;
-  @extend %max-height-100vh;
-  @extend %max-width-100;
-
-  @include mqMin ('w2') {
+.dialog__window {
+  box-shadow: $dialog__window--box-shadow;
+  @include background($dialog__window--background);
+  @include border($dialog__window--border);
+  @include sizes($dialog__window--sizes);
+  @include mqMin ("w3") {
     transform: translateY(-3vh);
   }
 }
 
 .dialog__container {
-  @extend %r-p_4;
+  @include padding($dialog__container--padding);
 }
 
 .dialog__header {
@@ -25,9 +25,10 @@
 }
 
 .dialog__dismiss-btn {
-  right: 1rem;
-  @extend %position-absolute;
-  top: 1rem;
+  position: absolute;
+  top     : $dialog__dismiss-btn--top;
+  right   : $dialog__dismiss-btn--right;
+  @include sizes($dialog__dismiss-btn--sizes);
 }
 
 .dialog__body {
