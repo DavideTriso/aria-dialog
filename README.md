@@ -2,12 +2,12 @@
 
 ## About
 
-jQuery plugin for **accessible** dialogs: **WAI ARIA 1.1** compliant. [Go to demo page](https://davidetriso.github.io/aria-dialog/) or [check on npm](https://www.npmjs.com/package/t-aria-dialog).
+HTML, CSS and JS UI-component for **user-friendly** and **accessible** dialogs: **WAI ARIA 1.1** compliant. [Go to demo page](https://davidetriso.github.io/aria-dialog/) or [check on npm](https://www.npmjs.com/package/t-aria-dialog).
 
 * User-friendly and accessible
 * Support for **modal dialogs** and **alert dialogs**.
-* Only 4KB (minified).
-* Deep linking / URL hash navigation
+* Developed following BEM methodology
+* JS plugin size: 4KB (minified)
 * Compatible with UMD
 
 ## Dependencies
@@ -100,8 +100,6 @@ Use following HTML markup to implement a dialog:
 </div>
 
 ```
-
-**IMPORTANT**: if no ID is set on the **dialog** element, the plugin automatically generates and sets an ID when the widget is initialised. Nevertheless, setting an ID to each dialog directly in HTML is **recommended** when using the widget in deep linking mode, because the ID of the dialog will be used as identifier in the URL. A meaningful ID will improve usability and SEO.
 
 ### JS: Initialise
 
