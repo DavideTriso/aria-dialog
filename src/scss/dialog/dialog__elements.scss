@@ -3,6 +3,7 @@
 //----------------
 
 .dialog__window {
+  position  : relative;
   box-shadow: $dialog__window--box-shadow;
   @include background($dialog__window--background);
   @include border($dialog__window--border);
