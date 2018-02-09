@@ -217,7 +217,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         firstFocussableElement = focussableElements.first(),
         lastFocussableElement = focussableElements.last();
 
-      self.elementWithFocus = $(':focus'); //the element with focus just before the dialog is opened
+      self.elementWithFocus = $(':focus'); //get the element with focus just before the dialog is opened
 
 
       /*
@@ -284,23 +284,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
           event.stopPropagation();
         });
       }
-      //close dialog when escape is pressed
-      if (settings.closeWithEsc) {
-        win.on('keydown.' + pluginName, function (event) {
-          if (event.keyCode === 27 && checkForModifierKeys(event) === 'none') {
-            self.updateHash('hide');
-          }
-        });
-      }
-      //close dialog if user clicks on bg
-      if (settings.closeOnBgClick) {
-        element.on('click.' + pluginName, function () {
-          self.updateHash('hide');
-        });
-        dialogWindow.on('click.' + pluginName, function (event) {
-          event.stopPropagation();
-        });
-      }
 
       //Update dialog state
       self.elementState = true;
@@ -353,13 +336,6 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
       //trigger custom event on window for authors to listen for
       win.trigger(pluginName + '.hide', [self]);
-    },
-    updateHash: function (action) {
-      if (action === 'show') {
-        document.location.hash = this.elementId;
-      } else {
-        document.location.hash = '';
-      }
     },
     methodCaller: function (methodName) {
       var self = this;
